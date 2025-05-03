@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Pomodoro Timer - Boost your productivity with the time-tested Pomodoro Technique. Set work and break intervals to maximize focus and efficiency.">
+    <meta name="keywords" content="pomodoro timer, pomodoro technique, productivity timer, work break timer, focus timer, time management, study timer, free pomodoro app">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Pomodoro Timer - Essential Tools">
+    <meta property="og:description" content="Boost your productivity with the time-tested Pomodoro Technique. Free online pomodoro timer tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/pomodoro-timer.html">
+    <meta property="og:image" content="../images/pomodoro-timer-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pomodoro Timer - Essential Tools">
+    <meta name="twitter:description" content="Boost your productivity with the time-tested Pomodoro Technique. Free online pomodoro timer tool.">
+    <title>Pomodoro Timer - Essential Tools | Free Online Productivity Timer</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/pomodoro-timer.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Pomodoro Timer",
+        "applicationCategory": "ProductivityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Pomodoro Timer - Boost your productivity with the time-tested Pomodoro Technique. Set work and break intervals to maximize focus and efficiency.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.7",
+            "ratingCount": "142"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-amber-500">Essential Tools</div>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-2">
+            <div class="container mx-auto px-4 flex flex-col space-y-2">
+                <a href="../index.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 3D Icon Container -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-6" data-tool-type="pomodoro-timer"></div>
+        
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Tool Header -->
+            <div class="p-6 bg-gradient-to-r from-red-500 to-amber-500 text-white">
+                <h1 class="text-3xl font-bold mb-2">Pomodoro Timer</h1>
+                <p class="text-red-100">Boost your productivity with timed work and break intervals</p>
+            </div>
+
+            <!-- Timer Interface -->
+            <div class="p-6">
+                <!-- Timer Display -->
+                <div class="text-center mb-8">
+                    <div id="timer-display" class="text-7xl font-bold text-gray-800 mb-2">25:00</div>
+                    <div id="timer-label" class="text-xl font-semibold text-red-500">WORK</div>
+                </div>
+
+                <!-- Timer Controls -->
+                <div class="flex justify-center space-x-4 mb-8">
+                    <button id="start-btn" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Start
+                    </button>
+                    <button id="pause-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Pause
+                    </button>
+                    <button id="reset-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Reset
+                    </button>
+                </div>
+
+                <!-- Timer Settings -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Timer Settings</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="work-duration" class="block text-gray-700 mb-1">Work Duration (minutes)</label>
+                            <input type="number" id="work-duration" min="1" max="60" value="25" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label for="short-break" class="block text-gray-700 mb-1">Short Break (minutes)</label>
+                            <input type="number" id="short-break" min="1" max="30" value="5" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label for="long-break" class="block text-gray-700 mb-1">Long Break (minutes)</label>
+                            <input type="number" id="long-break" min="1" max="60" value="15" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label for="pomodoro-count" class="block text-gray-700 mb-1">Pomodoros until long break</label>
+                        <input type="number" id="pomodoro-count" min="1" max="10" value="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <input type="checkbox" id="auto-start-breaks" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded">
+                        <label for="auto-start-breaks" class="ml-2 block text-gray-700">Auto-start breaks</label>
+                    </div>
+                    <div class="mt-2 flex items-center">
+                        <input type="checkbox" id="auto-start-pomodoros" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded">
+                        <label for="auto-start-pomodoros" class="ml-2 block text-gray-700">Auto-start pomodoros</label>
+                    </div>
+                    <div class="mt-2 flex items-center">
+                        <input type="checkbox" id="enable-notifications" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded" checked>
+                        <label for="enable-notifications" class="ml-2 block text-gray-700">Enable notifications</label>
+                    </div>
+                </div>
+
+                <!-- Session Progress -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-3">Session Progress</h3>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <div id="pomodoro-1" class="w-6 h-6 rounded-full bg-gray-200"></div>
+                        <div id="pomodoro-2" class="w-6 h-6 rounded-full bg-gray-200"></div>
+                        <div id="pomodoro-3" class="w-6 h-6 rounded-full bg-gray-200"></div>
+                        <div id="pomodoro-4" class="w-6 h-6 rounded-full bg-gray-200"></div>
+                    </div>
+                    <div class="text-center text-gray-600">
+                        <span id="completed-pomodoros">0</span> pomodoros completed
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tool Description & User Guide -->
+            <div class="p-6 border-t border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">About Pomodoro Timer</h2>
+                <p class="text-gray-700 mb-4">The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. This technique uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are known as "pomodoros".</p>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">How to Use</h3>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                    <li>Set your desired work duration, short break, and long break times</li>
+                    <li>Click the Start button to begin your first pomodoro work session</li>
+                    <li>Work until the timer rings, then take a short break</li>
+                    <li>After completing 4 pomodoros, take a longer break</li>
+                    <li>Use the Reset button to start over at any time</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Features</h3>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                    <li>Customizable work and break durations</li>
+                    <li>Visual and audio notifications when intervals end</li>
+                    <li>Session progress tracking</li>
+                    <li>Auto-start options for breaks and work sessions</li>
+                    <li>Mobile-friendly responsive design</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Frequently Asked Questions</h3>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-gray-800">What is the Pomodoro Technique?</h4>
+                        <p class="text-gray-700">The Pomodoro Technique is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are called "pomodoros".</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Why is it called the Pomodoro Technique?</h4>
+                        <p class="text-gray-700">The technique is named after the tomato-shaped kitchen timer that Francesco Cirillo used as a university student. "Pomodoro" is the Italian word for tomato.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">How does the Pomodoro Technique improve productivity?</h4>
+                        <p class="text-gray-700">The technique works by creating a sense of urgency with the timer, helping you fight distractions and maintain focus. The regular breaks help prevent mental fatigue and keep your mind fresh.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Can I customize the timer durations?</h4>
+                        <p class="text-gray-700">Yes, you can adjust the work duration, short break, and long break times to suit your personal preferences and work style.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AdSense Placement -->
+        <div class="max-w-4xl mx-auto mt-8 bg-white p-4 rounded-xl shadow-md overflow-hidden">
+            <div class="text-center text-gray-500 text-sm mb-2">Advertisement</div>
+            <div class="ad-container" style="min-height: 250px; display: flex; justify-content: center; align-items: center; background-color: #f9fafb;">
+                <!-- AdSense Code Would Go Here -->
+                <div class="text-gray-400">Ad Space - Optimized for Google AdSense</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-amber-400">Essential Tools</div>
+                    <p class="text-gray-400 mt-2">Free online tools to boost your productivity</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; <span class="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/pomodoro-timer.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Update footer with current year
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElements = document.querySelectorAll('.current-year');
+            const currentYear = new Date().getFullYear();
+            
+            yearElements.forEach(element => {
+                element.textContent = currentYear;
+            });
+        });
+    </script>
+</body>
+</html>

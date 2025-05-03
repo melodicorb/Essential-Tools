@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Reading Time Calculator - Estimate how long it takes to read any text. Perfect for writers, bloggers, and content creators.">
+    <meta name="keywords" content="reading time calculator, reading speed, text analyzer, writing tool, content planning, blog post length, reading estimate, free reading time tool">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Reading Time Calculator - Essential Tools">
+    <meta property="og:description" content="Estimate how long it takes to read any text. Perfect for writers, bloggers, and content creators.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/reading-time.html">
+    <meta property="og:image" content="../images/reading-time-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reading Time Calculator - Essential Tools">
+    <meta name="twitter:description" content="Estimate how long it takes to read any text. Perfect for writers, bloggers, and content creators.">
+    <title>Reading Time Calculator - Essential Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">T</span>
+                </div>
+                <span class="text-xl font-bold text-secondary">Essential Tools</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="font-medium hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="font-medium hover:text-primary transition-colors">Privacy Policy</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-500 hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-4 py-2">
+            <a href="../index.html" class="block py-2 hover:text-primary transition-colors">Home</a>
+            <a href="../pages/about.html" class="block py-2 hover:text-primary transition-colors">About</a>
+            <a href="../pages/contact.html" class="block py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="../pages/privacy.html" class="block py-2 hover:text-primary transition-colors">Privacy Policy</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Tool Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Reading Time Calculator</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Estimate how long it takes to read any text. Perfect for writers, bloggers, and content creators.</p>
+        </div>
+
+        <!-- 3D Icon -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-8 relative">
+            <!-- 3D icon will be rendered here by JavaScript -->
+        </div>
+
+        <!-- Tool Container -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <!-- Text Input Area -->
+            <div class="mb-6">
+                <textarea id="text-input" class="w-full h-64 p-4 border border-gray-300 rounded-lg focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 resize-none" placeholder="Type or paste your text here..."></textarea>
+            </div>
+
+            <!-- Reading Speed Settings -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Reading Speed</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <div class="flex items-center">
+                        <input type="radio" id="slow-speed" name="reading-speed" value="150" class="mr-2 text-primary focus:ring-primary">
+                        <label for="slow-speed">Slow (150 wpm)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="average-speed" name="reading-speed" value="225" checked class="mr-2 text-primary focus:ring-primary">
+                        <label for="average-speed">Average (225 wpm)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="fast-speed" name="reading-speed" value="300" class="mr-2 text-primary focus:ring-primary">
+                        <label for="fast-speed">Fast (300 wpm)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="custom-speed" name="reading-speed" value="custom" class="mr-2 text-primary focus:ring-primary">
+                        <label for="custom-speed">Custom:</label>
+                        <input type="number" id="custom-speed-value" class="ml-2 w-20 p-1 border border-gray-300 rounded" value="225" min="1" disabled>
+                        <span class="ml-1">wpm</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button id="clear-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">Clear Text</button>
+                <button id="copy-btn" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">Copy Text</button>
+                <button id="calculate-btn" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">Calculate Reading Time</button>
+                <label class="inline-flex items-center">
+                    <input type="checkbox" id="auto-calculate" class="rounded text-primary focus:ring-primary" checked>
+                    <span class="ml-2">Auto Calculate</span>
+                </label>
+            </div>
+
+            <!-- Results Display -->
+            <div class="bg-gray-100 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Reading Time Results</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-1">Words</h4>
+                        <p id="word-count" class="text-3xl font-bold text-primary">0</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-1">Reading Time</h4>
+                        <p id="reading-time" class="text-3xl font-bold text-primary">0 min</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-1">Characters</h4>
+                        <p id="character-count" class="text-3xl font-bold text-primary">0</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-1">Paragraphs</h4>
+                        <p id="paragraph-count" class="text-3xl font-bold text-primary">0</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Detailed Breakdown</h4>
+                    <ul id="detailed-results" class="space-y-2 text-gray-700">
+                        <li id="result-placeholder" class="italic text-gray-500">Enter text to see detailed reading time breakdown</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Guide -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">How to Use the Reading Time Calculator</h2>
+            <p class="text-gray-700 mb-4">This tool helps you estimate how long it will take to read a piece of text. It's perfect for writers, bloggers, and content creators who want to provide accurate reading time estimates for their audience.</p>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Basic Usage</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Type or paste your text into the text area above.</li>
+                <li>The tool will automatically calculate the reading time based on the selected reading speed.</li>
+                <li>Use the "Clear Text" button to start over with a blank text area.</li>
+                <li>Use the "Copy Text" button to copy your text to the clipboard.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Reading Speed Options</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li><strong>Slow (150 wpm):</strong> For technical, complex, or educational content.</li>
+                <li><strong>Average (225 wpm):</strong> For general content like blog posts or articles.</li>
+                <li><strong>Fast (300 wpm):</strong> For simple, conversational, or familiar content.</li>
+                <li><strong>Custom:</strong> Set your own reading speed in words per minute.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Tips for Content Creators</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Include reading time estimates at the beginning of your articles to set reader expectations.</li>
+                <li>Consider your audience when selecting reading speed - technical audiences may read slower, while regular readers of your content may read faster.</li>
+                <li>Break long content into sections with their own reading time estimates for better user experience.</li>
+                <li>Remember that actual reading times may vary based on content complexity and reader familiarity with the subject.</li>
+            </ul>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>How accurate is the reading time estimate?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>Our reading time calculator provides an estimate based on average reading speeds. Actual reading times may vary based on factors like content complexity, reader familiarity with the subject, and individual reading abilities. For most general content, the average reading speed (225 wpm) provides a reasonably accurate estimate.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>What reading speed should I use for my audience?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>Consider your content type and audience when selecting a reading speed. For general blog posts and articles, the average speed (225 wpm) works well. For technical documentation or academic content, use a slower speed (150 wpm). For simple, conversational content aimed at regular readers, a faster speed (300 wpm) may be more appropriate.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>Does the calculator account for images and other media?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>This calculator focuses on text content only. If your content includes images, videos, or interactive elements, you may want to add additional time to your estimate. As a general rule, add 5-10 seconds per image depending on complexity, and the full duration of any videos or interactive elements.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>How can I improve the readability of my content?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>To improve readability: use short paragraphs (3-4 sentences max), include subheadings to break up content, use bullet points for lists, keep sentences concise, use simple language when possible, and include relevant images to support your text. These practices make your content easier to read and understand, potentially reducing the actual reading time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold mb-4">Essential Tools</h2>
+                    <p class="text-gray-400 max-w-md">A collection of free online tools to help with everyday tasks. No ads, no subscriptions, just useful tools.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <div class="flex flex-col space-y-2">
+                        <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                        <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                        <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                        <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../js/enhanced-effects.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/reading-time.js"></script>
+    <script>
+        // Toggle FAQ items
+        function toggleFAQ(element) {
+            const content = element.nextElementSibling;
+            content.classList.toggle('hidden');
+            
+            // Toggle arrow direction
+            const arrow = element.querySelector('svg');
+            arrow.classList.toggle('rotate-180');
+        }
+    </script>
+</body>
+</html>

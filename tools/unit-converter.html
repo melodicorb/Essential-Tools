@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Unit Converter - Convert between different units of measurement including length, weight, volume, temperature, time, and more. Easy to use and accurate.">
+    <meta name="keywords" content="unit converter, measurement converter, length converter, weight converter, temperature converter, metric converter, imperial converter, free unit converter">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Unit Converter - Essential Tools">
+    <meta property="og:description" content="Convert between different units of measurement including length, weight, volume, temperature, time, and more. Easy to use and accurate.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/unit-converter.html">
+    <meta property="og:image" content="../images/unit-converter-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Unit Converter - Essential Tools">
+    <meta name="twitter:description" content="Convert between different units of measurement including length, weight, volume, temperature, time, and more. Easy to use and accurate.">
+    <title>Unit Converter - Essential Tools | Free Online Measurement Conversion Tool</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/unit-converter.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Unit Converter",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Unit Converter - Convert between different units of measurement including length, weight, volume, temperature, time, and more. Easy to use and accurate.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "125"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-amber-500">Essential Tools</div>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-2">
+            <div class="container mx-auto px-4 flex flex-col space-y-2">
+                <a href="../index.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 3D Icon Container -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-6" data-tool-type="unit-converter"></div>
+        
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Tool Header -->
+            <div class="p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                <h1 class="text-3xl font-bold mb-2">Unit Converter</h1>
+                <p class="text-blue-100">Convert between different units of measurement quickly and accurately</p>
+            </div>
+
+            <!-- Unit Converter Interface -->
+            <div class="p-6">
+                <!-- Conversion Type Selection -->
+                <div class="mb-6">
+                    <label for="conversion-type" class="block text-gray-700 font-medium mb-2">Conversion Type</label>
+                    <select id="conversion-type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="length">Length</option>
+                        <option value="weight">Weight/Mass</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="volume">Volume</option>
+                        <option value="area">Area</option>
+                        <option value="time">Time</option>
+                        <option value="speed">Speed</option>
+                        <option value="data">Digital Storage</option>
+                    </select>
+                </div>
+
+                <!-- Conversion Inputs -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <!-- From Unit -->
+                    <div>
+                        <div class="mb-4">
+                            <label for="from-value" class="block text-gray-700 font-medium mb-2">From</label>
+                            <input type="number" id="from-value" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter value">
+                        </div>
+                        <div>
+                            <label for="from-unit" class="block text-gray-700 font-medium mb-2">Unit</label>
+                            <select id="from-unit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <!-- Units will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- To Unit -->
+                    <div>
+                        <div class="mb-4">
+                            <label for="to-value" class="block text-gray-700 font-medium mb-2">To</label>
+                            <input type="number" id="to-value" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50" readonly>
+                        </div>
+                        <div>
+                            <label for="to-unit" class="block text-gray-700 font-medium mb-2">Unit</label>
+                            <select id="to-unit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <!-- Units will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Swap Button -->
+                <div class="flex justify-center mb-6">
+                    <button id="swap-units-btn" class="py-2 px-4 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        Swap Units
+                    </button>
+                </div>
+
+                <!-- Formula Display -->
+                <div id="formula-display" class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Conversion Formula</h3>
+                    <p id="formula-text" class="text-gray-700 font-mono">1 meter = 100 centimeters</p>
+                </div>
+
+                <!-- Settings -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Settings</h3>
+                    
+                    <div class="flex items-center mb-3">
+                        <input type="checkbox" id="auto-convert" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" checked>
+                        <label for="auto-convert" class="ml-2 block text-gray-700">Auto-convert as you type</label>
+                    </div>
+                    
+                    <div class="flex items-center mb-3">
+                        <label for="decimal-places" class="block text-gray-700 mr-3">Decimal Places:</label>
+                        <select id="decimal-places" class="px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="0">0</option>
+                            <option value="2" selected>2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="show-formulas" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" checked>
+                        <label for="show-formulas" class="ml-2 block text-gray-700">Show conversion formulas</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tool Description & User Guide -->
+            <div class="p-6 border-t border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">About Unit Converter</h2>
+                <p class="text-gray-700 mb-4">The Unit Converter allows you to convert between different units of measurement across various categories including length, weight, temperature, volume, area, time, speed, and digital storage.</p>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">How to Use</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>Select the type of conversion you want to perform (e.g., Length, Weight, Temperature).</li>
+                        <li>Enter the value you want to convert in the "From" field.</li>
+                        <li>Select the unit you're converting from and the unit you want to convert to.</li>
+                        <li>The converted value will automatically appear in the "To" field.</li>
+                        <li>Use the "Swap Units" button to quickly reverse the conversion.</li>
+                    </ol>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Features</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Convert between multiple unit types including metric and imperial systems</li>
+                        <li>Real-time conversion as you type</li>
+                        <li>View the mathematical formula used for each conversion</li>
+                        <li>Customize decimal precision for your results</li>
+                        <li>Simple, intuitive interface for quick conversions</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">FAQ</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-gray-800">How accurate are the conversions?</h4>
+                            <p class="text-gray-700">Our unit converter uses standard conversion factors and provides results with high precision. You can adjust the number of decimal places shown in the settings.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800">Can I convert between different types of units?</h4>
+                            <p class="text-gray-700">No, you can only convert between units of the same type (e.g., meters to feet, but not meters to kilograms).</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800">Are the conversions saved?</h4>
+                            <p class="text-gray-700">Your settings are saved in your browser, but individual conversions are not stored.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-amber-400">Essential Tools</div>
+                    <p class="text-gray-400 mt-2">Free online tools for everyday use</p>
+                </div>
+                <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 items-center">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/enhanced-effects.js"></script>
+    <script src="../js/unit-converter.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Loan Calculator - Calculate monthly payments, total interest, and amortization schedule for different loan types. Easy to use and accurate.">
+    <meta name="keywords" content="loan calculator, mortgage calculator, interest calculator, amortization schedule, loan payment calculator, free loan calculator">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Loan Calculator - Essential Tools">
+    <meta property="og:description" content="Calculate monthly payments, total interest, and amortization schedule for different loan types. Easy to use and accurate.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/loan-calculator.html">
+    <meta property="og:image" content="../images/loan-calculator-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Loan Calculator - Essential Tools">
+    <meta name="twitter:description" content="Calculate monthly payments, total interest, and amortization schedule for different loan types. Easy to use and accurate.">
+    <title>Loan Calculator - Essential Tools | Free Online Loan Payment Tool</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/loan-calculator.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Loan Calculator",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Loan Calculator - Calculate monthly payments, total interest, and amortization schedule for different loan types. Easy to use and accurate.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "156"
+        }
+    }
+    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- 3D Background Animation Container -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20 bg-animation-container"></div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-primary">Essential<span class="text-secondary">Tools</span></span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors">Privacy</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-white shadow-sm hidden">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors py-2">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors py-2">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors py-2">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors py-2">Privacy</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8 relative z-1">
+        <div class="max-w-4xl mx-auto">
+            <!-- Tool Header -->
+            <div class="flex flex-col md:flex-row items-center mb-8">
+                <div id="tool-3d-icon" class="tool-3d-container w-24 h-24 mr-4 mb-4 md:mb-0"></div>
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Loan Calculator</h1>
+                    <p class="text-gray-600">Calculate loan payments, interest, and amortization schedule</p>
+                </div>
+            </div>
+            
+            <!-- AdSense Ad - Top -->
+            <div class="w-full bg-gray-100 rounded-lg p-4 mb-8 text-center">
+                <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+                <!-- Ad code would go here -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1234567890123456"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <!-- Loan Calculator Tool -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <!-- Loan Type Selector -->
+                <div class="mb-6">
+                    <label for="loan-type" class="block text-sm font-medium text-gray-700 mb-1">Loan Type</label>
+                    <select id="loan-type" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-2 px-3 border text-gray-900 bg-white">
+                        <option value="mortgage">Mortgage Loan</option>
+                        <option value="auto">Auto Loan</option>
+                        <option value="personal">Personal Loan</option>
+                        <option value="student">Student Loan</option>
+                        <option value="business">Business Loan</option>
+                    </select>
+                </div>
+                
+                <!-- Loan Amount Input -->
+                <div class="mb-6">
+                    <label for="loan-amount" class="block text-sm font-medium text-gray-700 mb-1">Loan Amount</label>
+                    <div class="relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">$</span>
+                        </div>
+                        <input type="number" id="loan-amount" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-2 pl-7 pr-3 border text-gray-900 bg-white" placeholder="0.00" step="100" min="0">
+                    </div>
+                </div>
+                
+                <!-- Interest Rate Input -->
+                <div class="mb-6">
+                    <label for="interest-rate" class="block text-sm font-medium text-gray-700 mb-1">Interest Rate (%)</label>
+                    <input type="number" id="interest-rate" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-2 px-3 border text-gray-900 bg-white" placeholder="0.00" step="0.01" min="0" max="100">
+                </div>
+                
+                <!-- Loan Term Input -->
+                <div class="mb-6 grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="loan-term" class="block text-sm font-medium text-gray-700 mb-1">Loan Term</label>
+                        <input type="number" id="loan-term" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-2 px-3 border text-gray-900 bg-white" placeholder="0" step="1" min="1">
+                    </div>
+                    <div>
+                        <label for="term-unit" class="block text-sm font-medium text-gray-700 mb-1">Term Unit</label>
+                        <select id="term-unit" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-2 px-3 border text-gray-900 bg-white">
+                            <option value="years">Years</option>
+                            <option value="months">Months</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Payment Frequency -->
+                <div class="mb-6">
+                    <label for="payment-frequency" class="block text-sm font-medium text-gray-700 mb-1">Payment Frequency</label>
+                    <select id="payment-frequency" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-2 px-3 border text-gray-900 bg-white">
+                        <option value="monthly">Monthly</option>
+                        <option value="bi-weekly">Bi-weekly</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+                
+                <!-- Calculate Button -->
+                <div class="mb-6">
+                    <button id="calculate-btn" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50">
+                        Calculate
+                    </button>
+                </div>
+                
+                <!-- Result Display -->
+                <div id="result-display" class="hidden bg-gray-50 rounded-md p-4 border border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Loan Summary</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Monthly Payment:</p>
+                            <p id="monthly-payment" class="text-lg font-semibold text-primary">$0.00</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Total Payment:</p>
+                            <p id="total-payment" class="text-lg font-semibold text-gray-800">$0.00</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Total Interest:</p>
+                            <p id="total-interest" class="text-lg font-semibold text-gray-800">$0.00</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Number of Payments:</p>
+                            <p id="number-of-payments" class="text-lg font-semibold text-gray-800">0</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Amortization Schedule Toggle -->
+                    <div class="mb-2">
+                        <button id="toggle-schedule" class="text-primary hover:text-blue-700 font-medium flex items-center focus:outline-none">
+                            <span id="toggle-text">Show Amortization Schedule</span>
+                            <svg id="toggle-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Amortization Schedule (hidden by default) -->
+                    <div id="amortization-schedule" class="hidden mt-4 overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment #</th>
+                                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment</th>
+                                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Principal</th>
+                                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Interest</th>
+                                    <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Remaining Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="amortization-table-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Amortization data will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Settings</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="auto-calculate" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" checked>
+                        <label for="auto-calculate" class="ml-2 block text-sm text-gray-700">Auto-calculate on input change</label>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label for="decimal-places" class="block text-sm text-gray-700">Decimal places:</label>
+                        <select id="decimal-places" class="rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-1 px-2 border text-gray-900 bg-white text-sm">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tool Description -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">About Loan Calculator</h2>
+                <div class="prose max-w-none text-gray-600">
+                    <p class="mb-4">Our free online loan calculator helps you estimate monthly payments and understand the total cost of loans. Whether you're planning to buy a home, car, or need a personal loan, this tool provides accurate calculations to help you make informed financial decisions.</p>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mt-6 mb-2">How to Use the Loan Calculator</h3>
+                    <ol class="list-decimal pl-5 space-y-2 mb-4">
+                        <li>Select your loan type (mortgage, auto, personal, etc.)</li>
+                        <li>Enter the loan amount you wish to borrow</li>
+                        <li>Input the interest rate offered by your lender</li>
+                        <li>Specify the loan term (in years or months)</li>
+                        <li>Choose your preferred payment frequency</li>
+                        <li>Click "Calculate" to see your results</li>
+                    </ol>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mt-6 mb-2">Understanding Your Results</h3>
+                    <p class="mb-4">The calculator provides several key pieces of information:</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-4">
+                        <li><strong>Monthly Payment:</strong> The amount you'll pay each month (or according to your selected frequency)</li>
+                        <li><strong>Total Payment:</strong> The total amount you'll pay over the life of the loan (principal + interest)</li>
+                        <li><strong>Total Interest:</strong> The total interest you'll pay over the life of the loan</li>
+                        <li><strong>Amortization Schedule:</strong> A detailed breakdown of each payment showing how much goes to principal and interest</li>
+                    </ul>
+                    
+                    <h3 class="text-lg font-medium text-gray-800 mt-6 mb-2">Frequently Asked Questions</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-gray-800">What is amortization?</h4>
+                            <p>Amortization refers to the process of paying off a debt over time through regular payments. An amortization schedule shows how each payment is split between interest and principal reduction.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800">How is the monthly payment calculated?</h4>
+                            <p>The monthly payment is calculated using the formula: PMT = P[r(1+r)^n]/[(1+r)^n-1], where P is the principal, r is the monthly interest rate, and n is the number of payments.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800">Does this calculator account for taxes and insurance?</h4>
+                            <p>No, this calculator only estimates the loan payment based on principal and interest. For mortgages, you should add property taxes, homeowners insurance, and possibly PMI to get your total monthly payment.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800">Can I use this calculator for variable rate loans?</h4>
+                            <p>This calculator assumes a fixed interest rate throughout the loan term. For variable rate loans, the results will only be accurate until the rate changes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AdSense Ad - Bottom -->
+            <div class="w-full bg-gray-100 rounded-lg p-4 mb-8 text-center">
+                <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+                <!-- Ad code would go here -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1234567890123456"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600 text-sm">&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary text-sm transition-colors">Privacy Policy</a>
+                    <a href="../pages/about.html" class="text-gray-600 hover:text-primary text-sm transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-600 hover:text-primary text-sm transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../js/3d-animation.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/loan-calculator.js"></script>
+    <script>
+        // Initialize 3D background animation
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof init === 'function') {
+                init();
+            }
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Number to Words Converter - Convert numbers to written words in multiple languages and formats. Perfect for checks, legal documents, and more.">
+    <meta name="keywords" content="number to words, number converter, number to text, number spelling, check writing, legal document numbers, number in words, number to words converter">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Number to Words Converter - Essential Tools">
+    <meta property="og:description" content="Convert numbers to written words in multiple languages and formats. Perfect for checks, legal documents, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/number-to-words.html">
+    <meta property="og:image" content="../images/number-to-words-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Number to Words Converter - Essential Tools">
+    <meta name="twitter:description" content="Convert numbers to written words in multiple languages and formats. Perfect for checks, legal documents, and more.">
+    <title>Number to Words Converter - Essential Tools | Free Online Number Converter</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/number-to-words.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Number to Words Converter",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Number to Words Converter - Convert numbers to written words in multiple languages and formats. Perfect for checks, legal documents, and more.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "156"
+        }
+    }
+    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- 3D Background Animation Container -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20 bg-animation-container"></div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-primary">Essential<span class="text-secondary">Tools</span></span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors">Privacy</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-white shadow-sm hidden">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors py-2">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors py-2">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors py-2">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors py-2">Privacy</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Tool Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Number to Words Converter</h1>
+                <p class="text-lg text-gray-600">Convert numbers to written words in multiple languages and formats</p>
+            </div>
+            
+            <!-- 3D Tool Icon -->
+            <div class="tool-3d-container w-32 h-32 mx-auto mb-8"></div>
+            
+            <!-- Tool Container -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <!-- Number Input -->
+                <div class="mb-6">
+                    <label for="number-input" class="block text-sm font-medium text-gray-700 mb-1">Enter a Number:</label>
+                    <input type="text" id="number-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800" placeholder="Enter a number (e.g., 12345.67)">
+                </div>
+                
+                <!-- Options -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <!-- Language Selection -->
+                    <div>
+                        <label for="language" class="block text-sm font-medium text-gray-700 mb-1">Language:</label>
+                        <select id="language" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white">
+                            <option value="english">English</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                            <option value="german">German</option>
+                            <option value="italian">Italian</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Format Selection -->
+                    <div>
+                        <label for="format" class="block text-sm font-medium text-gray-700 mb-1">Format:</label>
+                        <select id="format" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white">
+                            <option value="standard">Standard</option>
+                            <option value="currency">Currency</option>
+                            <option value="ordinal">Ordinal</option>
+                            <option value="year">Year</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Additional Options -->
+                <div class="mb-6">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="auto-convert" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" checked>
+                        <label for="auto-convert" class="ml-2 block text-sm text-gray-700">Auto-convert as I type</label>
+                    </div>
+                </div>
+                
+                <!-- Convert Button -->
+                <button id="convert-btn" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mb-6">
+                    Convert to Words
+                </button>
+                
+                <!-- Result Display -->
+                <div id="result-display" class="bg-gray-50 border border-gray-200 rounded-md p-4 mb-4 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Result:</h3>
+                    <p id="result-text" class="text-gray-700 break-words"></p>
+                </div>
+                
+                <!-- Copy Button -->
+                <button id="copy-btn" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 hidden">
+                    Copy to Clipboard
+                </button>
+            </div>
+            
+            <!-- Tool Information -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">About Number to Words Converter</h2>
+                <p class="text-gray-700 mb-4">
+                    The Number to Words Converter is a useful tool that transforms numeric values into their written word equivalents. This tool is particularly helpful for:
+                </p>
+                <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                    <li>Writing checks and financial documents</li>
+                    <li>Creating legal documents where numbers need to be spelled out</li>
+                    <li>Educational purposes to help students learn number names</li>
+                    <li>Ensuring accuracy in formal documents</li>
+                    <li>Converting numbers to different languages</li>
+                </ul>
+                <p class="text-gray-700">
+                    Our converter supports multiple languages and formats, allowing you to convert numbers to standard words, currency format, ordinal numbers, or year format. Simply enter your number, select your preferences, and get the written representation instantly.
+                </p>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">What is the maximum number I can convert?</h3>
+                        <p class="text-gray-700">Our converter can handle numbers up to 999,999,999,999,999 (quadrillions). For most practical purposes, this range should be sufficient.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Can I convert decimal numbers?</h3>
+                        <p class="text-gray-700">Yes, the converter supports decimal numbers. For currency format, it will convert the decimal part as cents or the appropriate subunit.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">What languages are supported?</h3>
+                        <p class="text-gray-700">Currently, we support English, Spanish, French, German, and Italian. We plan to add more languages in future updates.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">What's the difference between the formats?</h3>
+                        <p class="text-gray-700">Standard format converts numbers to basic word form. Currency format adds currency terms (dollars and cents). Ordinal format converts to position indicators (first, second, third). Year format converts numbers as they would be read as years.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AdSense Ad -->
+            <div class="mb-8 text-center">
+                <!-- AdSense Ad Code -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1234567890123456"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <span class="text-xl font-bold">Essential<span class="text-secondary">Tools</span></span>
+                    <p class="text-gray-400 mt-1">Free online tools for everyday use</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end gap-4">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../js/3d-animation.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/number-to-words.js"></script>
+</body>
+</html>

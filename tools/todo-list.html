@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online To-Do List Manager - Organize your tasks and boost productivity with our simple and effective to-do list tool">
+    <meta name="keywords" content="to-do list, task manager, productivity tool, task organizer, free to-do app">
+    <title>To-Do List Manager - Essential Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">T</span>
+                </div>
+                <span class="text-xl font-bold text-primary">Essential Tools</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="font-medium hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="font-medium hover:text-primary transition-colors">Privacy Policy</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-4 py-2">
+            <a href="../index.html" class="block py-2 hover:text-primary transition-colors">Home</a>
+            <a href="../pages/about.html" class="block py-2 hover:text-primary transition-colors">About</a>
+            <a href="../pages/contact.html" class="block py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="../pages/privacy.html" class="block py-2 hover:text-primary transition-colors">Privacy Policy</a>
+        </div>
+    </header>
+
+    <!-- Tool Content -->
+    <main class="py-10">
+        <div class="container mx-auto px-4">
+            <!-- Tool Header -->
+            <div class="text-center mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">To-Do List Manager</h1>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Organize your tasks and boost productivity with our simple and effective to-do list tool</p>
+            </div>
+
+            <!-- Ad Container (Top) -->
+            <div class="ad-container mb-8">
+                <p>Advertisement Space</p>
+            </div>
+
+            <!-- 3D Icon -->
+            <div class="tool-3d-container" id="tool-3d-icon"></div>
+
+            <!-- Tool Container -->
+            <div class="tool-container mb-10">
+                <div class="mb-6">
+                    <div class="flex">
+                        <input type="text" id="task-input" placeholder="Add a new task..." class="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button id="add-task" class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 transition-colors">Add Task</button>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2">My Tasks</h3>
+                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                        <ul id="task-list" class="divide-y divide-gray-200">
+                            <!-- Tasks will be added here dynamically -->
+                            <li class="p-4 flex items-center justify-between task-item">
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="task-checkbox mr-3 h-5 w-5 text-primary focus:ring-primary rounded">
+                                    <span class="task-text">Example task (check to mark as completed)</span>
+                                </div>
+                                <button class="delete-task text-red-500 hover:text-red-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </li>
+                        </ul>
+                        <div id="empty-state" class="p-8 text-center text-gray-500 hidden">
+                            <p>No tasks yet. Add a task to get started!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center text-sm text-gray-600">
+                    <div>
+                        <span id="tasks-count">1</span> tasks remaining
+                    </div>
+                    <button id="clear-completed" class="text-primary hover:text-blue-700 transition-colors">Clear completed tasks</button>
+                </div>
+            </div>
+
+            <!-- Ad Container (Middle) -->
+            <div class="ad-container mb-8">
+                <p>Advertisement Space</p>
+            </div>
+
+            <!-- Tool Description -->
+            <div class="max-w-3xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold mb-4">About This Tool</h2>
+                <div class="prose prose-blue max-w-none">
+                    <p class="mb-4">Our To-Do List Manager helps you organize your tasks and boost productivity. With this simple yet powerful tool, you can:</p>
+                    <ul class="list-disc pl-5 mb-4 space-y-2">
+                        <li>Create and manage your daily tasks</li>
+                        <li>Mark tasks as completed</li>
+                        <li>Delete tasks you no longer need</li>
+                        <li>Clear all completed tasks at once</li>
+                        <li>Keep track of remaining tasks</li>
+                    </ul>
+                    <p class="mb-4">The tool uses local storage to save your tasks, so they'll still be there when you return to the page later (as long as you use the same device and browser).</p>
+                </div>
+            </div>
+
+            <!-- How to Use Section -->
+            <div class="max-w-3xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold mb-4">How to Use</h2>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <ol class="list-decimal pl-5 space-y-4">
+                        <li>
+                            <strong>Add a task:</strong> Type your task in the input field and click the "Add Task" button or press Enter.
+                        </li>
+                        <li>
+                            <strong>Mark as completed:</strong> Click the checkbox next to a task to mark it as completed. Completed tasks will be displayed with a strikethrough.
+                        </li>
+                        <li>
+                            <strong>Delete a task:</strong> Click the trash icon next to a task to remove it from your list.
+                        </li>
+                        <li>
+                            <strong>Clear completed tasks:</strong> Click the "Clear completed tasks" button to remove all tasks that have been marked as completed.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="max-w-3xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="space-y-4">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Are my tasks saved if I close the browser?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, your tasks are saved in your browser's local storage. They will persist even if you close the browser or restart your computer, as long as you use the same device and browser and don't clear your browser data.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Can I access my tasks from another device?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No, tasks are stored locally on your current device. They won't sync across different devices or browsers.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Is there a limit to how many tasks I can add?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>There's no hard limit, but browser local storage has size limitations (usually 5-10MB). For a typical to-do list, you can store hundreds or even thousands of tasks without issues.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>How do I organize tasks by priority or category?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>This basic version doesn't support categories or priorities. You can add this information in the task text itself (e.g., "[HIGH] Complete project proposal").</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad Container (Bottom) -->
+            <div class="ad-container mb-8">
+                <p>Advertisement Space</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-primary font-bold text-lg">T</span>
+                        </div>
+                        <span class="text-lg font-bold">Essential Tools</span>
+                    </a>
+                    <p class="text-gray-400 mt-2 text-sm">Free online utilities for everyday life</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>© <span id="current-year"></span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('active');
+            const icon = element.querySelector('svg');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // 3D Icon Animation
+        const iconContainer = document.getElementById('tool-3d-icon');
+        if (iconContainer) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, iconContainer.clientWidth / iconContainer.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(iconContainer.clientWidth, iconContainer.clientHeight);
+            iconContainer.appendChild(renderer.domElement);
+            
+            // Create clipboard/todo list 3D icon
+            const clipboardGeometry = new THREE.BoxGeometry(1.5, 2, 0.1);
+            const clipboardMaterial = new THREE.MeshStandardMaterial({ color: 0x3B82F6 });
+            const clipboard = new THREE.Mesh(clipboardGeometry, clipboardMaterial);
+            scene.add(clipboard);
+            
+            // Add paper lines
+            for (let i = 0; i < 5; i++) {
+                const lineGeometry = new THREE.BoxGeometry(1, 0.05, 0.02);
+                const lineMaterial = new THREE.MeshStandardMaterial({ color: 0xFFFFFF });
+                const line = new THREE.Mesh(lineGeometry, lineMaterial);
+                line.position.set(0, 0.6 - (i * 0.3), 0.06);
+                clipboard.add(line);
+                
+                // Add checkmark for some lines
+                if (i % 2 === 0) {
+                    const checkGeometry = new THREE.BoxGeometry(0.15, 0.15, 0.02);
+                    const checkMaterial = new THREE.MeshStandardMaterial({ color: 0x10B981 });
+                    const check = new THREE.Mesh(checkGeometry, checkMaterial);
+                    check.position.set(-0.5, 0.6 - (i * 0.3), 0.07);
+                    clipboard.add(check);
+                }
+            }
+            
+            // Add clip at top
+            const clipGeometry = new THREE.BoxGeometry(0.4, 0.1, 0.15);
+            const clipMaterial = new THREE.MeshStandardMaterial({ color: 0xC0C0C0 });
+            const clip = new THREE.Mesh(clipGeometry, clipMaterial);
+            clip.position.set(0, 1.1, 0.05);
+            clipboard.add(clip);
+            
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 2);
+            scene.add(directionalLight);
+            
+            camera.position.z = 3;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                clipboard.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = iconContainer.clientWidth / iconContainer.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(iconContainer.clientWidth, iconContainer.clientHeight);
+            });
+        }
+
+        // To-Do List Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskInput = document.getElementById('task-input');
+            const addTaskBtn = document.getElementById('add-task');
+            const taskList = document.getElementById('task-list');
+            const tasksCount = document.getElementById('tasks-count');
+            const clearCompletedBtn = document.getElementById('clear-completed');
+            const emptyState = document.getElementById('empty-state');
+            
+            // Load tasks from localStorage
+            let tasks = JSON.parse(localStorage.getItem('todo-tasks')) || [];
+            
+            // Initialize the task list
+            function initTaskList() {
+                // Clear the example task
+                taskList.innerHTML = '';
+                
+                if (tasks.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    tasksCount.textContent = '0';
+                } else {
+                    emptyState.classList.add('hidden');
+                    renderTasks();
+                    updateTaskCount();
+                }
+            }
+            
+            // Render all tasks
+            function renderTasks() {
+                taskList.innerHTML = '';
+                tasks.forEach((task, index) => {
+                    const taskItem = document.createElement('li');
+                    taskItem.className = 'p-4 flex items-center justify-between task-item';
+                    taskItem.innerHTML = `
+                        <div class="flex items-center">
+                            <input type="checkbox" class="task-checkbox mr-3 h-5 w-5 text-primary focus:ring-primary rounded" ${task.completed ? 'checked' : ''}>
+                            <span class="task-text ${task.completed ? 'line-through text-gray-400' : ''}">${task.text}</span>
+                        </div>
+                        <button class="delete-task text-red-500 hover:text-red-700" data-index="${index}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    `;
+                    taskList.appendChild(taskItem);
+                    
+                    // Add event listener to checkbox
+                    const checkbox = taskItem.querySelector('.task-checkbox');
+                    checkbox.addEventListener('change', function() {
+                        toggleTaskComplete(index);
+                    });
+                    
+                    // Add event listener to delete button
+                    const deleteBtn = taskItem.querySelector('.delete-task');
+                    deleteBtn.addEventListener('click', function() {
+                        deleteTask(index);
+                    });
+                });
+            }
+            
+            // Add a new task
+            function addTask(text) {
+                if (text.trim() === '') return;
+                
+                tasks.push({
+                    text: text,
+                    completed: false
+                });
+                
+                saveTasksToLocalStorage();
+                renderTasks();
+                updateTaskCount();
+                emptyState.classList.add('hidden');
+                taskInput.value = '';
+            }
+            
+            // Toggle task complete status
+            function toggleTaskComplete(index) {
+                tasks[index].completed = !tasks[index].completed;
+                saveTasksToLocalStorage();
+                renderTasks();
+                updateTaskCount();
+            }
+            
+            // Delete a task
+            function deleteTask(index) {
+                tasks.splice(index, 1);
+                saveTasksToLocalStorage();
+                renderTasks();
+                updateTaskCount();
+                
+                if (tasks.length === 0) {
+                    emptyState.classList.remove('hidden');
+                }
+            }
+            
+            // Clear all completed tasks
+            function clearCompletedTasks() {
+                tasks = tasks.filter(task => !task.completed);
+                saveTasksToLocalStorage();
+                renderTasks();
+                updateTaskCount();
+                
+                if (tasks.length === 0) {
+                    emptyState.classList.remove('hidden');
+                }
+            }
+            
+            // Update the tasks count
+            function updateTaskCount() {
+                const remainingTasks = tasks.filter(task => !task.completed).length;
+                tasksCount.textContent = remainingTasks;
+            }
+            
+            // Save tasks to localStorage
+            function saveTasksToLocalStorage() {
+                localStorage.setItem('todo-tasks', JSON.stringify(tasks));
+            }
+            
+            // Event Listeners
+            addTaskBtn.addEventListener('click', function() {
+                addTask(taskInput.value);
+            });
+            
+            taskInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTask(taskInput.value);
+                }
+            });
+            
+            clearCompletedBtn.addEventListener('click', clearCompletedTasks);
+            
+            // Initialize the task list
+            initTaskList();
+        });
+    </script>
+</body>
+</html>

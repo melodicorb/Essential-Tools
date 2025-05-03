@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Interactive Periodic Table - Explore chemical elements with detailed information, properties, and interactive features.">
+    <meta name="keywords" content="periodic table, chemical elements, chemistry tool, element properties, atomic number, atomic mass, electron configuration, interactive periodic table, free chemistry tool">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Interactive Periodic Table - Essential Tools">
+    <meta property="og:description" content="Explore chemical elements with detailed information, properties, and interactive features. Free online periodic table tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/periodic-table.html">
+    <meta property="og:image" content="../images/periodic-table-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Interactive Periodic Table - Essential Tools">
+    <meta name="twitter:description" content="Explore chemical elements with detailed information, properties, and interactive features. Free online periodic table tool.">
+    <title>Interactive Periodic Table - Essential Tools | Free Chemistry Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">T</span>
+                </div>
+                <span class="text-xl font-bold text-secondary">Essential Tools</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="font-medium hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="font-medium hover:text-primary transition-colors">Privacy Policy</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-500 hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-4 py-2">
+            <a href="../index.html" class="block py-2 hover:text-primary transition-colors">Home</a>
+            <a href="../pages/about.html" class="block py-2 hover:text-primary transition-colors">About</a>
+            <a href="../pages/contact.html" class="block py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="../pages/privacy.html" class="block py-2 hover:text-primary transition-colors">Privacy Policy</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Tool Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Interactive Periodic Table</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore chemical elements with detailed information, properties, and interactive features.</p>
+        </div>
+
+        <!-- 3D Icon -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-8 relative">
+            <!-- 3D icon will be rendered here by JavaScript -->
+        </div>
+
+        <!-- Tool Container -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <!-- Controls and Filters -->
+            <div class="mb-6">
+                <div class="flex flex-wrap gap-4 justify-between items-center">
+                    <div class="flex-1 min-w-[250px]">
+                        <input type="text" id="element-search" class="w-full p-2 border border-gray-300 rounded-lg focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" placeholder="Search elements...">
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <select id="category-filter" class="p-2 border border-gray-300 rounded-lg focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                            <option value="all">All Categories</option>
+                            <option value="alkali-metals">Alkali Metals</option>
+                            <option value="alkaline-earth-metals">Alkaline Earth Metals</option>
+                            <option value="transition-metals">Transition Metals</option>
+                            <option value="post-transition-metals">Post-Transition Metals</option>
+                            <option value="metalloids">Metalloids</option>
+                            <option value="nonmetals">Nonmetals</option>
+                            <option value="halogens">Halogens</option>
+                            <option value="noble-gases">Noble Gases</option>
+                            <option value="lanthanides">Lanthanides</option>
+                            <option value="actinides">Actinides</option>
+                        </select>
+                        <button id="reset-filters" class="p-2 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Periodic Table Container -->
+            <div id="periodic-table" class="overflow-x-auto mb-6">
+                <!-- The periodic table will be generated here by JavaScript -->
+                <div class="text-center text-gray-500 py-10">Loading periodic table...</div>
+            </div>
+
+            <!-- Element Details Panel -->
+            <div id="element-details" class="hidden bg-gray-100 rounded-lg p-4 mb-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h2 id="element-name" class="text-2xl font-bold"></h2>
+                        <p id="element-category" class="text-sm text-gray-600"></p>
+                    </div>
+                    <button id="close-details" class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="font-semibold mb-2">Basic Information</h3>
+                        <table class="w-full text-sm">
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">Symbol:</td>
+                                <td id="element-symbol"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">Atomic Number:</td>
+                                <td id="element-atomic-number"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">Atomic Mass:</td>
+                                <td id="element-atomic-mass"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">Electron Configuration:</td>
+                                <td id="element-electron-config"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Physical Properties</h3>
+                        <table class="w-full text-sm">
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">State at 20°C:</td>
+                                <td id="element-state"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">Melting Point:</td>
+                                <td id="element-melting-point"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">Boiling Point:</td>
+                                <td id="element-boiling-point"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 pr-4 font-medium">Density:</td>
+                                <td id="element-density"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="font-semibold mb-2">Description</h3>
+                    <p id="element-description" class="text-sm"></p>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-xs">
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-blue-500 mr-2"></div>
+                    <span>Alkali Metals</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-yellow-500 mr-2"></div>
+                    <span>Alkaline Earth Metals</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-purple-500 mr-2"></div>
+                    <span>Transition Metals</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-gray-400 mr-2"></div>
+                    <span>Post-Transition Metals</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-green-300 mr-2"></div>
+                    <span>Metalloids</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-green-500 mr-2"></div>
+                    <span>Nonmetals</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-teal-500 mr-2"></div>
+                    <span>Halogens</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-red-500 mr-2"></div>
+                    <span>Noble Gases</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-orange-500 mr-2"></div>
+                    <span>Lanthanides</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-pink-500 mr-2"></div>
+                    <span>Actinides</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Guide -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">How to Use the Periodic Table</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Exploring Elements</h3>
+                    <p>Click on any element in the periodic table to view detailed information including atomic properties, physical characteristics, and descriptions.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Searching</h3>
+                    <p>Use the search box to find elements by name, symbol, or atomic number. The table will highlight matching elements as you type.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Filtering</h3>
+                    <p>Use the category dropdown to filter elements by their chemical properties (metals, nonmetals, etc.). Click the reset button to clear all filters.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">What is the periodic table?</h3>
+                    <p>The periodic table is a tabular arrangement of chemical elements, organized by their atomic number, electron configuration, and recurring chemical properties. Elements are presented in order of increasing atomic number.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Who created the periodic table?</h3>
+                    <p>The periodic table was created by Russian chemist Dmitri Mendeleev in 1869. He organized the elements known at the time by their atomic weight and valence, noticing patterns that allowed him to predict the properties of elements that had not yet been discovered.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">How are elements organized in the periodic table?</h3>
+                    <p>Elements are arranged in order of increasing atomic number (number of protons). The table is organized into periods (rows) and groups (columns). Elements in the same group have similar chemical properties because they have the same number of electrons in their outer shell.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">What do the different colors represent?</h3>
+                    <p>The colors in the periodic table represent different categories of elements based on their properties. For example, alkali metals, noble gases, transition metals, etc. The color coding helps to visualize the relationships between elements.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-amber-400">Essential Tools</div>
+                    <p class="text-gray-400 mt-2">Free online tools to boost your productivity</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; <span class="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/periodic-table.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

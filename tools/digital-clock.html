@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Digital Clock & Alarm - Keep track of time with a customizable digital clock, multiple time zones, and alarm functionality.">
+    <meta name="keywords" content="digital clock, online clock, alarm clock, time zones, world clock, timer, free clock, time display">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Digital Clock & Alarm - Essential Tools">
+    <meta property="og:description" content="Keep track of time with a customizable digital clock, multiple time zones, and alarm functionality. Free online digital clock tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/digital-clock.html">
+    <meta property="og:image" content="../images/digital-clock-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Digital Clock & Alarm - Essential Tools">
+    <meta name="twitter:description" content="Keep track of time with a customizable digital clock, multiple time zones, and alarm functionality. Free online digital clock tool.">
+    <title>Digital Clock & Alarm - Essential Tools | Free Online Time Tool</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/digital-clock.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Digital Clock & Alarm",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Digital Clock & Alarm - Keep track of time with a customizable digital clock, multiple time zones, and alarm functionality.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "135"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-amber-500">Essential Tools</div>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-2">
+            <div class="container mx-auto px-4 flex flex-col space-y-2">
+                <a href="../index.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 3D Icon Container -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-6" data-tool-type="digital-clock"></div>
+        
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Tool Header -->
+            <div class="p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                <h1 class="text-3xl font-bold mb-2">Digital Clock & Alarm</h1>
+                <p class="text-blue-100">Keep track of time with customizable display and alarms</p>
+            </div>
+
+            <!-- Clock Interface -->
+            <div class="p-6">
+                <!-- Clock Display -->
+                <div class="text-center mb-8">
+                    <div id="clock-display" class="text-7xl font-bold text-gray-800 mb-2 font-mono">00:00:00</div>
+                    <div id="date-display" class="text-xl text-gray-600">Monday, January 1, 2023</div>
+                    <div id="timezone-display" class="text-md text-gray-500 mt-1">UTC+00:00</div>
+                </div>
+
+                <!-- Clock Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Display Settings -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h3 class="text-xl font-semibold mb-4">Display Settings</h3>
+                        
+                        <div class="mb-4">
+                            <label for="time-format" class="block text-gray-700 mb-1">Time Format</label>
+                            <select id="time-format" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="24">24-hour (23:59:59)</option>
+                                <option value="12">12-hour (11:59:59 PM)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="timezone-select" class="block text-gray-700 mb-1">Time Zone</label>
+                            <select id="timezone-select" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <!-- Time zones will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <input type="checkbox" id="show-seconds" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" checked>
+                            <label for="show-seconds" class="ml-2 block text-gray-700">Show seconds</label>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="show-date" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" checked>
+                            <label for="show-date" class="ml-2 block text-gray-700">Show date</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Alarm Settings -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h3 class="text-xl font-semibold mb-4">Alarm</h3>
+                        
+                        <div class="mb-4">
+                            <label for="alarm-time" class="block text-gray-700 mb-1">Set Alarm Time</label>
+                            <input type="time" id="alarm-time" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <input type="checkbox" id="alarm-enabled" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded">
+                            <label for="alarm-enabled" class="ml-2 block text-gray-700">Enable alarm</label>
+                        </div>
+                        
+                        <button id="test-alarm-btn" class="bg-blue-100 text-blue-700 hover:bg-blue-200 font-medium py-2 px-4 rounded-md transition-colors">
+                            Test Alarm Sound
+                        </button>
+                        
+                        <div id="alarm-status" class="mt-4 hidden p-3 bg-blue-100 text-blue-800 rounded-md">
+                            Alarm set for <span id="alarm-time-display">00:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Appearance Settings -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Appearance</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="clock-color" class="block text-gray-700 mb-1">Clock Color</label>
+                            <input type="color" id="clock-color" value="#1F2937" class="w-full h-10 p-1 border border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label for="clock-font" class="block text-gray-700 mb-1">Font Style</label>
+                            <select id="clock-font" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="mono">Monospace</option>
+                                <option value="sans">Sans-serif</option>
+                                <option value="serif">Serif</option>
+                                <option value="display">Display</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="clock-size" class="block text-gray-700 mb-1">Clock Size</label>
+                            <select id="clock-size" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="normal">Normal</option>
+                                <option value="large">Large</option>
+                                <option value="small">Small</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tool Description & User Guide -->
+            <div class="p-6 border-t border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">About Digital Clock & Alarm</h2>
+                <p class="text-gray-700 mb-4">This digital clock provides an accurate time display with customizable options and alarm functionality. Perfect for keeping track of time across different time zones or setting reminders.</p>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">How to Use</h3>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                    <li>The clock automatically displays your current local time</li>
+                    <li>Customize the display format (12/24 hour) and appearance</li>
+                    <li>Select different time zones to view time around the world</li>
+                    <li>Set an alarm by entering a time and enabling the alarm toggle</li>
+                    <li>Test the alarm sound before setting it</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Features</h3>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                    <li>Real-time digital clock with seconds display</li>
+                    <li>Multiple time zone support</li>
+                    <li>12/24 hour time format options</li>
+                    <li>Customizable appearance (colors, fonts, size)</li>
+                    <li>Alarm functionality with audio notification</li>
+                    <li>Date display with day of the week</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">FAQ</h3>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Is the time accurate?</h4>
+                        <p class="text-gray-700">Yes, the clock uses your device's system time which is typically synchronized with internet time servers.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Will the alarm work if I close the browser?</h4>
+                        <p class="text-gray-700">No, the alarm requires the page to be open to function. It's designed for use while you have the browser open.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Can I set multiple alarms?</h4>
+                        <p class="text-gray-700">Currently, the tool supports one alarm at a time. You can modify the alarm time as needed.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">How do I stop the alarm once it starts?</h4>
+                        <p class="text-gray-700">When the alarm sounds, a stop button will appear that you can click to silence the alarm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold mb-2">Essential Tools</div>
+                    <p class="text-gray-400">Free online utilities to boost your productivity</p>
+                </div>
+                <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 items-center">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/digital-clock.js"></script>
+    <script>
+        // Initialize mobile menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

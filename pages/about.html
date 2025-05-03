@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Essential Tools - Learn more about our collection of 30 free online utilities for everyday life">
+    <meta name="keywords" content="about us, essential tools, online utilities, free tools, productivity tools">
+    <title>About Us - Essential Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">T</span>
+                </div>
+                <span class="text-xl font-bold text-primary">Essential Tools</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="about.html" class="font-medium text-primary">About</a>
+                <a href="contact.html" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <a href="privacy.html" class="font-medium hover:text-primary transition-colors">Privacy Policy</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-4 py-2">
+            <a href="../index.html" class="block py-2 hover:text-primary transition-colors">Home</a>
+            <a href="about.html" class="block py-2 text-primary">About</a>
+            <a href="contact.html" class="block py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="privacy.html" class="block py-2 hover:text-primary transition-colors">Privacy Policy</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-10">
+        <div class="container mx-auto px-4">
+            <!-- Page Header -->
+            <div class="text-center mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">About Essential Tools</h1>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Your go-to platform for free, useful online utilities that make everyday tasks easier</p>
+            </div>
+
+            <!-- Ad Container (Top) -->
+            <div class="ad-container mb-8">
+                <p>Advertisement Space</p>
+            </div>
+
+            <!-- About Content -->
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden mb-10">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Our Mission</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        At Essential Tools, our mission is to provide a comprehensive collection of free, easy-to-use online utilities that help people solve everyday problems and boost productivity. We believe that useful tools should be accessible to everyone, regardless of technical expertise or budget constraints.
+                    </p>
+                    
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">What We Offer</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        We've carefully curated 30 essential tools across three main categories:
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-3 text-primary">Personal & Productivity</h3>
+                            <p class="text-gray-600">Tools to help you organize your life, manage your time, and boost your personal productivity.</p>
+                        </div>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-3 text-secondary">Math & Converters</h3>
+                            <p class="text-gray-600">Calculators and converters for various units, currencies, and mathematical operations.</p>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-3 text-accent">Educational & Utility</h3>
+                            <p class="text-gray-600">Learning tools and utilities for students, educators, and anyone looking to expand their knowledge.</p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Our Approach</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        All our tools are:
+                    </p>
+                    
+                    <ul class="list-disc pl-6 mb-8 space-y-2 text-gray-600">
+                        <li><strong>100% Free:</strong> No hidden fees, subscriptions, or premium features.</li>
+                        <li><strong>No Sign-up Required:</strong> Use any tool instantly without creating an account.</li>
+                        <li><strong>Privacy-Focused:</strong> We don't collect personal data or track your usage beyond basic analytics.</li>
+                        <li><strong>No API Keys Needed:</strong> All tools work client-side without requiring external API keys.</li>
+                        <li><strong>Mobile-Friendly:</strong> Designed to work seamlessly on all devices, from desktops to smartphones.</li>
+                    </ul>
+                    
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Why Choose Essential Tools?</h2>
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="text-lg font-semibold mb-2">Simplicity</h3>
+                            <p class="text-gray-600">Our tools are designed with simplicity in mind, making them accessible to users of all technical levels.</p>
+                        </div>
+                        
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="text-lg font-semibold mb-2">Reliability</h3>
+                            <p class="text-gray-600">Built with modern web technologies to ensure consistent performance and reliability.</p>
+                        </div>
+                        
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="text-lg font-semibold mb-2">Accessibility</h3>
+                            <p class="text-gray-600">Designed following accessibility best practices to be usable by everyone.</p>
+                        </div>
+                        
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="text-lg font-semibold mb-2">No Installation</h3>
+                            <p class="text-gray-600">All tools run in your browser - no downloads, installations, or updates required.</p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Get in Touch</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        We're always looking to improve our tools and add new ones based on user feedback. If you have suggestions, questions, or just want to say hello, please visit our <a href="contact.html" class="text-primary hover:underline">Contact page</a>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Ad Container (Bottom) -->
+            <div class="ad-container mb-8">
+                <p>Advertisement Space</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-primary font-bold text-lg">T</span>
+                        </div>
+                        <span class="text-lg font-bold">Essential Tools</span>
+                    </a>
+                    <p class="text-gray-400 mt-2 text-sm">Free online utilities for everyday life</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>© <span id="current-year"></span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

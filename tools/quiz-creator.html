@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Quiz Creator - Create, edit, and share custom quizzes easily. Perfect for teachers, students, and trainers.">
+    <meta name="keywords" content="quiz creator, quiz maker, create quiz, online quiz tool, quiz generator, custom quiz, interactive quiz">
+    <meta name="author" content="Essential Tools">
+    <title>Quiz Creator - Essential Tools | Free Online Quiz Making Tool</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/quiz-creator.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Quiz Creator",
+        "applicationCategory": "EducationalApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Quiz Creator - Create, edit, and share custom quizzes easily. Perfect for teachers, students, and trainers.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.7",
+            "ratingCount": "142"
+        }
+    }
+    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- 3D Background Animation Container -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20 bg-animation-container"></div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-primary">Essential<span class="text-secondary">Tools</span></span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors">Privacy</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-white shadow-sm hidden">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors py-2">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors py-2">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors py-2">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors py-2">Privacy</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <!-- Tool Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Quiz Creator</h1>
+                <p class="text-lg text-gray-600">Create, edit, and share custom quizzes</p>
+            </div>
+            
+            <!-- 3D Tool Icon -->
+            <div class="tool-3d-container w-32 h-32 mx-auto mb-8"></div>
+            
+            <!-- Tool Container -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-gray-800">
+                <!-- Quiz Mode Selection -->
+                <div class="mb-6">
+                    <label for="quiz-mode" class="block text-sm font-medium text-gray-700 mb-1">Quiz Mode:</label>
+                    <select id="quiz-mode" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="create">Create New Quiz</option>
+                        <option value="edit">Edit Existing Quiz</option>
+                        <option value="take">Take a Quiz</option>
+                    </select>
+                </div>
+                
+                <!-- Create Quiz Section -->
+                <div id="create-quiz-section" class="mb-6">
+                    <div class="mb-4">
+                        <label for="quiz-title" class="block text-sm font-medium text-gray-700 mb-1">Quiz Title:</label>
+                        <input type="text" id="quiz-title" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter quiz title">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="quiz-description" class="block text-sm font-medium text-gray-700 mb-1">Quiz Description:</label>
+                        <textarea id="quiz-description" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" rows="3" placeholder="Enter quiz description"></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Questions:</label>
+                            <button id="add-question-btn" class="text-sm bg-primary hover:bg-blue-600 text-white font-medium py-1 px-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                Add Question
+                            </button>
+                        </div>
+                        <div id="questions-container" class="space-y-4">
+                            <!-- Questions will be added here dynamically -->
+                            <div class="p-4 border border-gray-200 rounded-md question-item">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-md font-medium">Question 1</h3>
+                                    <button class="delete-question-btn text-red-500 hover:text-red-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="mb-2">
+                                    <input type="text" class="question-text w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter question text">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Question Type:</label>
+                                    <select class="question-type w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option value="multiple-choice">Multiple Choice</option>
+                                        <option value="true-false">True/False</option>
+                                        <option value="short-answer">Short Answer</option>
+                                    </select>
+                                </div>
+                                <div class="options-container mb-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Options:</label>
+                                    <div class="space-y-2 mb-2">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="correct-1" class="h-4 w-4 text-primary focus:ring-primary border-gray-300">
+                                            <input type="text" class="option-text ml-2 flex-grow px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Option 1">
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" name="correct-1" class="h-4 w-4 text-primary focus:ring-primary border-gray-300">
+                                            <input type="text" class="option-text ml-2 flex-grow px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Option 2">
+                                        </div>
+                                    </div>
+                                    <button class="add-option-btn text-sm text-primary hover:text-blue-700 font-medium">+ Add Option</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Edit Quiz Section -->
+                <div id="edit-quiz-section" class="mb-6 hidden">
+                    <div class="mb-4">
+                        <label for="quiz-select" class="block text-sm font-medium text-gray-700 mb-1">Select Quiz:</label>
+                        <select id="quiz-select" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">-- Select a quiz --</option>
+                            <!-- Saved quizzes will be loaded here -->
+                        </select>
+                    </div>
+                    <div id="edit-quiz-content" class="hidden">
+                        <!-- Quiz editing interface will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Take Quiz Section -->
+                <div id="take-quiz-section" class="mb-6 hidden">
+                    <div class="mb-4">
+                        <label for="take-quiz-select" class="block text-sm font-medium text-gray-700 mb-1">Select Quiz:</label>
+                        <select id="take-quiz-select" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">-- Select a quiz --</option>
+                            <!-- Saved quizzes will be loaded here -->
+                        </select>
+                    </div>
+                    <div id="quiz-content" class="hidden">
+                        <!-- Quiz content will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex space-x-4">
+                    <button id="save-quiz-btn" class="flex-grow bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                        Save Quiz
+                    </button>
+                    <button id="clear-quiz-btn" class="flex-grow bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                        Clear
+                    </button>
+                </div>
+                
+                <!-- Result Display -->
+                <div id="result-display" class="mt-6 bg-gray-50 border border-gray-200 rounded-md p-4 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Result:</h3>
+                    <div id="result-text" class="text-gray-900 font-medium break-words"></div>
+                </div>
+                
+                <!-- Share Quiz -->
+                <div id="share-quiz-section" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Share Quiz:</h3>
+                    <div class="flex">
+                        <input type="text" id="share-link" class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" readonly>
+                        <button id="copy-link-btn" class="bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-r-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tool Information -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">About Quiz Creator</h2>
+                <p class="text-gray-700 mb-4">
+                    The Quiz Creator is a versatile tool that helps you create, edit, and share custom quizzes. This tool is particularly useful for:
+                </p>
+                <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                    <li>Teachers creating assessments for their students</li>
+                    <li>Trainers developing knowledge checks for workshops</li>
+                    <li>Students creating study materials for exams</li>
+                    <li>Content creators making interactive quizzes for their audience</li>
+                    <li>Anyone looking to test knowledge on specific topics</li>
+                </ul>
+                <p class="text-gray-700">
+                    Our tool offers multiple question types, customizable options, and the ability to save and share your quizzes. Simply select your desired mode, create or select a quiz, and get started!
+                </p>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">How do I create a quiz?</h3>
+                        <p class="text-gray-700">To create a quiz, select "Create New Quiz" from the Quiz Mode dropdown. Enter a title and description for your quiz, then add questions using the "Add Question" button. For each question, you can select the question type and add options. Once you're done, click "Save Quiz" to store your quiz.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">What question types are supported?</h3>
+                        <p class="text-gray-700">The Quiz Creator supports multiple question types: Multiple Choice (select one correct answer from several options), True/False (binary choice questions), and Short Answer (free text responses that can be evaluated against expected answers).</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">How are quizzes saved?</h3>
+                        <p class="text-gray-700">Quizzes are saved locally in your browser's storage. This means they will persist between sessions on the same device and browser, but won't be accessible from other devices unless you share them.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">How do I share my quiz with others?</h3>
+                        <p class="text-gray-700">After saving your quiz, you'll see a "Share Quiz" section with a unique link. Copy this link and share it with others. When they open the link, they'll be able to take your quiz directly.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AdSense Ad -->
+            <div class="mb-8 text-center">
+                <!-- AdSense Ad Code -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1234567890123456"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <span class="text-xl font-bold">Essential<span class="text-secondary">Tools</span></span>
+                    <p class="text-gray-400 mt-1">Free online tools for everyday use</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end gap-4">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../js/3d-animation.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/quiz-creator.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Word Counter Tool - Count words, characters, sentences, and paragraphs in your text. Perfect for writers, students, and content creators.">
+    <meta name="keywords" content="word counter, character counter, text analyzer, writing tool, sentence counter, paragraph counter, reading time, free word counter">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Word Counter Tool - Essential Tools">
+    <meta property="og:description" content="Count words, characters, sentences, and paragraphs in your text. Perfect for writers, students, and content creators.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/word-counter.html">
+    <meta property="og:image" content="../images/word-counter-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Word Counter Tool - Essential Tools">
+    <meta name="twitter:description" content="Count words, characters, sentences, and paragraphs in your text. Perfect for writers, students, and content creators.">
+    <title>Word Counter Tool - Essential Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">T</span>
+                </div>
+                <span class="text-xl font-bold text-secondary">Essential Tools</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="font-medium hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="font-medium hover:text-primary transition-colors">Privacy Policy</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-4 py-2">
+            <a href="../index.html" class="block py-2 hover:text-primary transition-colors">Home</a>
+            <a href="../pages/about.html" class="block py-2 hover:text-primary transition-colors">About</a>
+            <a href="../pages/contact.html" class="block py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="../pages/privacy.html" class="block py-2 hover:text-primary transition-colors">Privacy Policy</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Tool Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Word Counter Tool</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Count words, characters, sentences, and paragraphs in your text. Get instant statistics for your writing.</p>
+        </div>
+
+        <!-- 3D Icon -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-8 relative">
+            <!-- 3D icon will be rendered here by JavaScript -->
+        </div>
+
+        <!-- Tool Container -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <!-- Text Input Area -->
+            <div class="mb-6">
+                <textarea id="text-input" class="w-full h-64 p-4 border border-gray-300 rounded-lg focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 resize-none" placeholder="Type or paste your text here..."></textarea>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button id="clear-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">Clear Text</button>
+                <button id="copy-btn" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">Copy Text</button>
+                <label class="inline-flex items-center">
+                    <input type="checkbox" id="exclude-spaces" class="rounded text-primary focus:ring-primary">
+                    <span class="ml-2">Exclude Spaces</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="checkbox" id="exclude-special-chars" class="rounded text-primary focus:ring-primary">
+                    <span class="ml-2">Exclude Special Characters</span>
+                </label>
+            </div>
+
+            <!-- Statistics Display -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-gray-100 p-4 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-1">Words</h3>
+                    <p id="word-count" class="text-3xl font-bold text-primary">0</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-1">Characters</h3>
+                    <p id="character-count" class="text-3xl font-bold text-primary">0</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-1">Sentences</h3>
+                    <p id="sentence-count" class="text-3xl font-bold text-primary">0</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-1">Paragraphs</h3>
+                    <p id="paragraph-count" class="text-3xl font-bold text-primary">0</p>
+                </div>
+            </div>
+
+            <!-- Additional Statistics -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Reading Time</h3>
+                    <p id="reading-time" class="text-xl font-medium text-primary">0 minutes</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Speaking Time</h3>
+                    <p id="speaking-time" class="text-xl font-medium text-primary">0 minutes</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Keyword Density</h3>
+                    <div id="keyword-density" class="text-sm text-gray-600 max-h-24 overflow-y-auto">
+                        <p class="italic">Enter text to see keyword density</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Guide -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">How to Use the Word Counter Tool</h2>
+            <p class="text-gray-700 mb-4">This word counter tool helps you analyze your text and provides useful statistics for your writing. Here's how to use it:</p>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Basic Usage</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Type or paste your text into the text area above.</li>
+                <li>The tool will automatically count words, characters, sentences, and paragraphs.</li>
+                <li>Use the "Clear Text" button to start over with a blank text area.</li>
+                <li>Use the "Copy Text" button to copy your text to the clipboard.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Advanced Features</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Check "Exclude Spaces" to count only non-space characters.</li>
+                <li>Check "Exclude Special Characters" to count only alphanumeric characters.</li>
+                <li>View estimated reading and speaking times based on average rates.</li>
+                <li>See keyword density analysis to identify frequently used words in your text.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Tips for Writers</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Use the word count to meet specific requirements for essays, articles, or social media posts.</li>
+                <li>Check sentence and paragraph counts to ensure your writing has good structure and flow.</li>
+                <li>Monitor keyword density to avoid overusing certain words or phrases.</li>
+                <li>Use the reading time estimate to gauge how long it will take your audience to read your content.</li>
+            </ul>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>How accurate is the word count?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>Our word counter defines a word as a sequence of characters separated by spaces, punctuation, or line breaks. This is the standard method used by most word processors and writing tools. For specialized counting needs (like counting hyphenated words as one), you may need to adjust your text accordingly.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>How is reading time calculated?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>Reading time is calculated based on an average reading speed of 225 words per minute for adults reading content in their native language. This is an estimate and actual reading times may vary based on the complexity of the text and the reader's speed.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>Does the tool save my text?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>No, this word counter tool processes all text directly in your browser. Your text is never sent to our servers or stored anywhere. When you refresh the page or close your browser, the text is completely cleared.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>What counts as a sentence or paragraph?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>A sentence is counted when text ends with a period, question mark, exclamation point, or similar terminal punctuation. A paragraph is counted when text is separated by one or more line breaks. This follows standard writing conventions but may not capture all special cases.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>How can I use the keyword density feature?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>The keyword density feature shows you which words appear most frequently in your text. This is useful for SEO purposes or to avoid repetition in your writing. Common words like "the" and "and" are excluded from the analysis to focus on meaningful content words.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-primary font-bold text-lg">T</span>
+                        </div>
+                        <span class="text-lg font-bold text-secondary">Essential Tools</span>
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center space-x-4 mb-4 md:mb-0">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-4 pt-4 text-center text-gray-400 text-sm">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/enhanced-effects.js"></script>
+    <script src="../js/word-counter.js"></script>
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('svg');
+            answer.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+</body>
+</html>

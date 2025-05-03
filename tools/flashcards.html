@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Flashcards Tool - Create, study and manage digital flashcards for effective learning. Perfect for students, language learners, and professionals.">
+    <meta name="keywords" content="flashcards, digital flashcards, study tool, memory cards, spaced repetition, learning tool, educational flashcards, free flashcards">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Flashcards Tool - Essential Tools">
+    <meta property="og:description" content="Create and study digital flashcards for effective learning. Perfect for students, language learners, and professionals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/flashcards.html">
+    <meta property="og:image" content="../images/flashcards-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Flashcards Tool - Essential Tools">
+    <meta name="twitter:description" content="Create and study digital flashcards for effective learning. Perfect for students, language learners, and professionals.">
+    <title>Flashcards Tool - Essential Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6B21A8',
+                        secondary: '#EAB308',
+                        accent: '#7C3AED',
+                        dark: '#1F2937',
+                    },
+                    gridTemplateColumns: {
+                        '18': 'repeat(18, minmax(0, 1fr))'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for flashcards */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-preserve-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .transform-rotateY-180 {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">T</span>
+                </div>
+                <span class="text-xl font-bold text-secondary">Essential Tools</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="font-medium hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="font-medium hover:text-primary transition-colors">Privacy Policy</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-4 py-2">
+            <a href="../index.html" class="block py-2 hover:text-primary transition-colors">Home</a>
+            <a href="../pages/about.html" class="block py-2 hover:text-primary transition-colors">About</a>
+            <a href="../pages/contact.html" class="block py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="../pages/privacy.html" class="block py-2 hover:text-primary transition-colors">Privacy Policy</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Tool Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Flashcards Tool</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Create, organize, and study digital flashcards to enhance your learning and memory retention.</p>
+        </div>
+
+        <!-- 3D Icon -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-8 relative">
+            <!-- 3D icon will be rendered here by JavaScript -->
+        </div>
+
+        <!-- Tool Container -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <!-- Controls -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
+                    <button id="create-deck-btn" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-purple-800 transition-colors">Create New Deck</button>
+                    <select id="deck-selector" class="rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-2 px-3 border text-gray-900 bg-white">
+                        <option value="">Select a Deck</option>
+                        <!-- Decks will be populated here -->
+                    </select>
+                </div>
+                <div class="flex space-x-2 w-full md:w-auto">
+                    <button id="add-card-btn" class="bg-secondary text-gray-900 px-4 py-2 rounded-md hover:bg-yellow-500 transition-colors flex-1 md:flex-none">Add Card</button>
+                    <button id="study-btn" class="bg-accent text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors flex-1 md:flex-none">Study</button>
+                </div>
+            </div>
+
+            <!-- Flashcards Display Area -->
+            <div id="flashcards-container" class="min-h-[300px]">
+                <!-- Initial state - empty deck message -->
+                <div id="empty-state" class="flex flex-col items-center justify-center h-64 text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    <p class="text-lg">Create a new deck or select an existing one to get started</p>
+                </div>
+
+                <!-- Cards list view -->
+                <div id="cards-list" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Cards will be populated here -->
+                </div>
+
+                <!-- Study mode view -->
+                <div id="study-mode" class="hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span id="card-counter" class="text-gray-600">Card 1 of 10</span>
+                        </div>
+                        <div>
+                            <button id="exit-study-btn" class="text-gray-600 hover:text-gray-900">Exit Study Mode</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Flashcard for studying -->
+                    <div id="study-card" class="flashcard-study cursor-pointer w-full h-64 perspective-1000 mx-auto max-w-2xl">
+                        <div class="flashcard-inner relative w-full h-full transition-transform duration-500 transform-style-preserve-3d">
+                            <div class="flashcard-front absolute w-full h-full bg-white border-2 border-primary rounded-xl p-6 flex items-center justify-center backface-hidden">
+                                <p id="card-front-text" class="text-xl text-center">Front side text</p>
+                            </div>
+                            <div class="flashcard-back absolute w-full h-full bg-primary text-white border-2 border-primary rounded-xl p-6 flex items-center justify-center backface-hidden transform-rotateY-180">
+                                <p id="card-back-text" class="text-xl text-center">Back side text</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center mt-6 space-x-4">
+                        <button id="prev-card-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">Previous</button>
+                        <button id="flip-card-btn" class="bg-secondary text-gray-800 px-4 py-2 rounded-md hover:bg-yellow-500 transition-colors">Flip Card</button>
+                        <button id="next-card-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Guide -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">How to Use the Flashcards Tool</h2>
+            <p class="text-gray-700 mb-4">This flashcards tool helps you create and study digital flashcards to improve your memory and learning efficiency. Here's how to use it:</p>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Getting Started</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Click "Create New Deck" to start a new collection of flashcards.</li>
+                <li>Give your deck a name related to the subject you're studying.</li>
+                <li>Use the dropdown menu to switch between different decks you've created.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Creating and Managing Cards</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Click "Add Card" to create a new flashcard in your selected deck.</li>
+                <li>Enter text for both the front (question) and back (answer) of the card.</li>
+                <li>Edit or delete existing cards by using the buttons on each card.</li>
+                <li>Your cards are automatically saved to your browser's local storage.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Study Mode</h3>
+            <ul class="list-disc pl-5 text-gray-800 mb-4 space-y-2">
+                <li>Click "Study" to enter study mode with your current deck.</li>
+                <li>Click on a card or use the "Flip Card" button to reveal the answer.</li>
+                <li>Navigate through your cards using the "Previous" and "Next" buttons.</li>
+                <li>Exit study mode at any time to return to the card management view.</li>
+            </ul>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>What are flashcards and why are they effective?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>Flashcards are learning tools that contain a question on one side and the answer on the other. They're effective because they use active recall testing and spaced repetition, which are proven techniques for moving information from short-term to long-term memory.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>Are my flashcards saved if I close the browser?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>Yes, all your flashcards and decks are automatically saved to your browser's local storage. They will remain available when you return to this page, even after closing your browser. However, they are specific to the device and browser you're using.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>Can I export or share my flashcards?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>Currently, the tool doesn't support exporting or sharing flashcards directly. However, you can take screenshots of your cards or manually copy the content to share with others. We're working on adding export and import features in future updates.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>How many flashcards can I create?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>There's no hard limit on the number of flashcards you can create. However, since they're stored in your browser's local storage, which has limited space (usually 5-10MB), we recommend keeping your total number of cards under a few thousand for optimal performance.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800" onclick="toggleFAQ(this)">
+                        <span>What's the best way to create effective flashcards?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mt-2 text-gray-600 hidden">
+                        <p>For effective flashcards, keep information concise, use your own words, focus on one concept per card, and include visual cues when possible. Study regularly with spaced repetition for best results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-primary font-bold text-lg">T</span>
+                        </div>
+                        <span class="text-lg font-bold text-secondary">Essential Tools</span>
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center space-x-4 mb-4 md:mb-0">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-4 pt-4 text-center text-gray-400 text-sm">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/enhanced-effects.js"></script>
+    <script src="../js/flashcards.js"></script>

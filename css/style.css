@@ -1,0 +1,352 @@
+/* Main Styles for Essential Tools Website */
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c890f7;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b28bf5;
+}
+
+/* Dropdown styling for better contrast */
+select {
+    background-color: white;
+    color: #1F2937;
+    border: 1px solid #d1d5db;
+}
+
+select option {
+    background-color: white;
+    color: #1F2937;
+}
+
+select option:checked,
+select option:hover {
+    background-color: #2563eb;
+    color: white;
+}
+
+/* Ensure input fields have good contrast */
+input[type="number"],
+input[type="text"],
+input[type="email"],
+textarea {
+    background-color: white;
+    color: #1F2937;
+}
+
+/* Ensure labels have good contrast against their backgrounds */
+label {
+    color: #1F2937;
+}
+
+/* Ensure element cells have good text contrast */
+.element-cell {
+    color: #ffffff !important;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* 3D Background Animation Container */
+#background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Colorful Theme Enhancements */
+body {
+    background: linear-gradient(135deg, rgba(190, 151, 253, 0.9), rgba(182, 140, 245, 0.95));
+    position: relative;
+    overflow-x: hidden;
+    color: #ffffff;
+}
+
+/* Enhanced 3D Effects */
+.card, .tool-container, .faq-item {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.card:hover, .tool-container:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    box-shadow: 0 15px 30px -10px rgba(107, 33, 168, 0.5), 0 5px 15px -5px rgba(234, 179, 8, 0.3);
+}
+
+/* Gradient Text Effects */
+.gradient-text {
+    background: linear-gradient(90deg, #7C3AED, #8B5CF6, #6B21A8, #EAB308, #F59E0B);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-shift 8s ease infinite;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Tool Icon Animation */
+.tool-icon {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+a:hover .tool-icon {
+    transform: translateY(-10px) rotateY(10deg) scale(1.05);
+    filter: drop-shadow(0 15px 15px rgba(107, 33, 168, 0.4));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(-10px) rotateY(10deg); }
+    50% { transform: translateY(-15px) rotateY(-5deg); }
+    100% { transform: translateY(-10px) rotateY(10deg); }
+}
+
+/* 3D Logo/Icon Styles */
+.tool-3d-container {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 2rem;
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    overflow: visible;
+}
+
+/* Animated Glow Effects */
+.glow-effect {
+    position: relative;
+}
+
+.glow-effect::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #7C3AED, #6B21A8, #8B5CF6, #EAB308, #F59E0B);
+    background-size: 400% 400%;
+    z-index: -1;
+    filter: blur(15px);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: glow-animation 8s ease infinite;
+}
+
+.glow-effect:hover::before {
+    opacity: 0.7;
+}
+
+@keyframes glow-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Tool Page Specific Styles */
+.tool-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+    color: #1F2937;
+}
+
+/* Add colorful border effect */
+.tool-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #7C3AED, #6B21A8, #8B5CF6, #EAB308, #F59E0B);
+    background-size: 300% 100%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.tool-description {
+    margin-bottom: 2rem;
+    color: #4B5563;
+    line-height: 1.6;
+}
+
+.tool-section {
+    margin-bottom: 2rem;
+}
+
+/* FAQ Accordion Styles */
+.faq-item {
+    border-bottom: 1px solid #E5E7EB;
+    padding: 1rem 0;
+}
+
+.faq-question {
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    margin-top: 0.5rem;
+    display: none;
+    color: #4B5563;
+    padding-left: 1rem;
+}
+
+.faq-answer.active {
+    display: block;
+}
+
+/* AdSense Placeholder Styles */
+.ad-container {
+    width: 100%;
+    height: 90px;
+    background-color: #F3F4F6;
+    border: 1px dashed #D1D5DB;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    color: #6B7280;
+    font-size: 0.875rem;
+}
+
+/* Additional 3D and Animation Effects */
+.parallax {
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+/* Floating animation class */
+.float {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Color pulse animation for buttons */
+.color-pulse {
+    animation: color-pulse 1.5s ease-in-out;
+}
+
+@keyframes color-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* 3D Text Effect */
+.text-3d {
+    text-shadow: 0px 1px 0px #c7c8ca,
+                 0px 2px 0px #b1b3b6,
+                 0px 3px 0px #9d9fa2,
+                 0px 4px 0px #8a8c8e,
+                 0px 5px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Neon glow effect */
+.neon-glow {
+    text-shadow: 0 0 5px #fff, 
+                 0 0 10px #fff, 
+                 0 0 15px #7C3AED, 
+                 0 0 20px #7C3AED, 
+                 0 0 25px #7C3AED;
+    animation: neon-pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse {
+    from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #7C3AED, 0 0 20px #7C3AED; }
+    to { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #EAB308, 0 0 20px #EAB308, 0 0 25px #EAB308; }
+}
+
+/* 3D Button Effect */
+.btn-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-3d:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateZ(-1px) scale(0.96);
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.btn-3d:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-3d:active {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+    .tool-container {
+        padding: 1rem;
+    }
+    
+    .tool-3d-container {
+        height: 150px;
+    }
+    
+    /* Reduce animation intensity on mobile */
+    .card:hover, .tool-container:hover {
+        transform: translateY(-5px) rotateX(2deg);
+    }
+    
+    .glow-effect::before {
+        filter: blur(10px);
+    }
+}

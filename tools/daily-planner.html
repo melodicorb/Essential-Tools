@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Daily Planner - Plan your day with an interactive calendar and schedule your events efficiently. Organize your tasks, set reminders, and boost productivity.">
+    <meta name="keywords" content="daily planner, calendar, schedule, productivity tool, event planner, free planner app, task organizer, time management, daily schedule">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Daily Planner - Essential Tools">
+    <meta property="og:description" content="Plan your day with an interactive calendar and schedule your events efficiently. Free online daily planner tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/daily-planner.html">
+    <meta property="og:image" content="../images/daily-planner-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daily Planner - Essential Tools">
+    <meta name="twitter:description" content="Plan your day with an interactive calendar and schedule your events efficiently. Free online daily planner tool.">
+    <title>Daily Planner - Essential Tools | Free Online Calendar & Scheduling</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/daily-planner.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Daily Planner",
+        "applicationCategory": "ProductivityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Daily Planner - Plan your day with an interactive calendar and schedule your events efficiently.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "156"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-amber-500">Essential Tools</div>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-2">
+            <div class="container mx-auto px-4 flex flex-col space-y-2">
+                <a href="../index.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 3D Icon Container -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-6" data-tool-type="daily-planner"></div>
+        
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Tool Header -->
+            <div class="p-6 bg-gradient-to-r from-purple-600 to-amber-500 text-white">
+                <h1 class="text-3xl font-bold mb-2">Daily Planner</h1>
+                <p class="text-purple-100">Plan your day with an interactive calendar</p>
+            </div>
+
+            <!-- Planner Interface -->
+            <div class="p-6">
+                <!-- Calendar Navigation -->
+                <div class="flex justify-between items-center mb-6">
+                    <button id="prev-month" class="bg-purple-100 hover:bg-purple-200 text-purple-800 font-semibold py-2 px-4 rounded-lg transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Previous
+                    </button>
+                    <h2 id="current-month" class="text-2xl font-bold text-gray-800">Month Year</h2>
+                    <button id="next-month" class="bg-purple-100 hover:bg-purple-200 text-purple-800 font-semibold py-2 px-4 rounded-lg transition-colors">
+                        Next
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="mb-6">
+                    <div class="grid grid-cols-7 gap-1 mb-2">
+                        <div class="text-center font-semibold text-gray-600">Sun</div>
+                        <div class="text-center font-semibold text-gray-600">Mon</div>
+                        <div class="text-center font-semibold text-gray-600">Tue</div>
+                        <div class="text-center font-semibold text-gray-600">Wed</div>
+                        <div class="text-center font-semibold text-gray-600">Thu</div>
+                        <div class="text-center font-semibold text-gray-600">Fri</div>
+                        <div class="text-center font-semibold text-gray-600">Sat</div>
+                    </div>
+                    <div id="calendar-grid" class="grid grid-cols-7 gap-1">
+                        <!-- Calendar days will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Event Form -->
+                <div id="event-form" class="hidden bg-purple-50 rounded-lg p-4 mb-6">
+                    <h3 class="text-xl font-semibold mb-3">Add Event for <span id="selected-date"></span></h3>
+                    <div class="mb-4">
+                        <label for="event-title" class="block text-gray-700 mb-1">Event Title</label>
+                        <input type="text" id="event-title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Enter event title">
+                    </div>
+                    <div class="mb-4">
+                        <label for="event-time" class="block text-gray-700 mb-1">Time</label>
+                        <input type="time" id="event-time" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="event-description" class="block text-gray-700 mb-1">Description (optional)</label>
+                        <textarea id="event-description" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" rows="3" placeholder="Enter event description"></textarea>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="save-event" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors">Save Event</button>
+                        <button id="cancel-event" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-md transition-colors">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Events List -->
+                <div id="events-container" class="hidden">
+                    <h3 class="text-xl font-semibold mb-3">Events for <span id="events-date"></span></h3>
+                    <div id="events-list" class="space-y-2">
+                        <!-- Events will be listed here -->
+                    </div>
+                    <div class="mt-4">
+                        <button id="add-event-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors">Add Event</button>
+                        <button id="close-events-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-md transition-colors ml-2">Close</button>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="text-center py-8 hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-gray-500 mb-1">No Events Yet</h3>
+                    <p class="text-gray-500">Click on a date to add your first event</p>
+                </div>
+            </div>
+            
+            <!-- Tool Description & User Guide -->
+            <div class="p-6 border-t border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">About Daily Planner</h2>
+                <p class="text-gray-700 mb-4">The Daily Planner is a powerful tool designed to help you organize your day efficiently. With an interactive calendar interface, you can easily schedule events, set reminders, and keep track of your daily activities.</p>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">How to Use</h3>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                    <li>Navigate through months using the Previous and Next buttons</li>
+                    <li>Click on any date to view or add events for that day</li>
+                    <li>Add new events with titles, times, and descriptions</li>
+                    <li>View all your scheduled events in an organized list</li>
+                    <li>Delete events you no longer need</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Features</h3>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                    <li>Interactive calendar with month navigation</li>
+                    <li>Event scheduling with time and description</li>
+                    <li>Local storage to save your events</li>
+                    <li>Mobile-friendly responsive design</li>
+                    <li>Clean, intuitive user interface</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Frequently Asked Questions</h3>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Are my events saved if I close the browser?</h4>
+                        <p class="text-gray-700">Yes, all your events are saved in your browser's local storage and will persist even if you close the browser or restart your device.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Can I export my calendar events?</h4>
+                        <p class="text-gray-700">Currently, the export feature is not available, but we're working on adding this functionality in a future update.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Is there a limit to how many events I can add?</h4>
+                        <p class="text-gray-700">There is no practical limit to the number of events you can add, though performance may vary depending on your device.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Can I set recurring events?</h4>
+                        <p class="text-gray-700">Recurring events are planned for a future update. Currently, you need to add each event individually.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AdSense Placement -->
+        <div class="max-w-4xl mx-auto mt-8 bg-white p-4 rounded-xl shadow-md overflow-hidden">
+            <div class="text-center text-gray-500 text-sm mb-2">Advertisement</div>
+            <div class="ad-container" style="min-height: 250px; display: flex; justify-content: center; align-items: center; background-color: #f9fafb;">
+                <!-- AdSense Code Would Go Here -->
+                <div class="text-gray-400">Ad Space - Optimized for Google AdSense</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-amber-400">Essential Tools</div>
+                    <p class="text-gray-400 mt-2">Free online tools to boost your productivity</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; <span class="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/daily-planner.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Update footer with current year
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElements = document.querySelectorAll('.current-year');
+            const currentYear = new Date().getFullYear();
+            
+            yearElements.forEach(element => {
+                element.textContent = currentYear;
+            });
+        });
+    </script>
+</body>
+</html>

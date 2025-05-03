@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Code Editor Tool - Write, edit, and run code in multiple programming languages. Perfect for developers, students, and coding enthusiasts.">
+    <meta name="keywords" content="code editor, online IDE, programming tool, code runner, syntax highlighting, web development, HTML editor, CSS editor, JavaScript editor, free code editor">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Code Editor Tool - Essential Tools">
+    <meta property="og:description" content="Write, edit, and run code in multiple programming languages. Perfect for developers, students, and coding enthusiasts.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/code-editor.html">
+    <meta property="og:image" content="../images/code-editor-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Code Editor Tool - Essential Tools">
+    <meta name="twitter:description" content="Write, edit, and run code in multiple programming languages. Perfect for developers, students, and coding enthusiasts.">
+    <title>Code Editor Tool - Essential Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">T</span>
+                </div>
+                <span class="text-xl font-bold text-secondary">Essential Tools</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="font-medium hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="font-medium hover:text-primary transition-colors">Privacy Policy</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-4 py-2">
+            <a href="../index.html" class="block py-2 hover:text-primary transition-colors">Home</a>
+            <a href="../pages/about.html" class="block py-2 hover:text-primary transition-colors">About</a>
+            <a href="../pages/contact.html" class="block py-2 hover:text-primary transition-colors">Contact</a>
+            <a href="../pages/privacy.html" class="block py-2 hover:text-primary transition-colors">Privacy Policy</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Tool Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Code Editor Tool</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Write, edit, and run code in multiple programming languages. Perfect for quick coding tasks and experiments.</p>
+        </div>
+
+        <!-- 3D Icon -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-8 relative">
+            <!-- 3D icon will be rendered here by JavaScript -->
+        </div>
+
+        <!-- Tool Container -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-3 mb-6">
+                <select id="language-select" class="px-4 py-2 border border-gray-300 rounded-md focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                    <option value="javascript">JavaScript</option>
+                    <option value="htmlmixed">HTML</option>
+                    <option value="css">CSS</option>
+                </select>
+                <select id="theme-select" class="px-4 py-2 border border-gray-300 rounded-md focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                    <option value="default">Default Theme</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="material">Material</option>
+                </select>
+                <button id="run-btn" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">Run Code</button>
+                <button id="clear-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">Clear Editor</button>
+                <button id="copy-btn" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">Copy Code</button>
+            </div>
+
+            <!-- Code Editor -->
+            <div class="mb-6">
+                <div id="code-editor" class="border border-gray-300 rounded-lg"></div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2">Output</h3>
+                <div id="output" class="bg-gray-100 p-4 rounded-lg h-40 overflow-auto font-mono text-sm"></div>
+            </div>
+        </div>
+
+        <!-- Tool Guide -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">How to Use the Code Editor</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-lg font-semibold">1. Select a Language</h3>
+                    <p>Choose from JavaScript, HTML, or CSS using the dropdown menu.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">2. Write Your Code</h3>
+                    <p>Use the editor to write or paste your code. The editor provides syntax highlighting and auto-completion.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">3. Run Your Code</h3>
+                    <p>Click the "Run Code" button to execute your code and see the output below.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">4. Additional Features</h3>
+                    <ul class="list-disc pl-5">
+                        <li>Change the editor theme using the theme selector</li>
+                        <li>Copy your code to clipboard with the "Copy Code" button</li>
+                        <li>Clear the editor with the "Clear Editor" button</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-lg font-semibold">Is my code saved?</h3>
+                    <p>Yes, your code is automatically saved in your browser's local storage, so you won't lose your work if you accidentally close the tab.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Can I run server-side code?</h3>
+                    <p>No, this editor only supports client-side languages (JavaScript, HTML, CSS) that can run in your browser.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Is there a limit to how much code I can write?</h3>
+                    <p>There's no strict limit, but very large files may cause performance issues in the browser.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Can I share my code with others?</h3>
+                    <p>Currently, there's no built-in sharing feature, but you can copy your code and share it through other means.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">T</span>
+                        </div>
+                        <span class="text-xl font-bold text-secondary">Essential Tools</span>
+                    </a>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="../pages/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <span class="mx-2">|</span>
+                        <a href="../pages/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                        <span class="mx-2">|</span>
+                        <a href="../pages/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/code-editor.js"></script>
+</body>
+</html>

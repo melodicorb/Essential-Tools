@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Prime Number Checker - Check if a number is prime or generate a list of prime numbers. Perfect for mathematics, education, and programming.">
+    <meta name="keywords" content="prime number, prime checker, prime number generator, prime number calculator, prime number tool, math tool">
+    <meta name="author" content="Essential Tools">
+    <title>Prime Number Checker - Essential Tools | Free Online Prime Number Tool</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/prime-number.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Prime Number Checker",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Prime Number Checker - Check if a number is prime or generate a list of prime numbers. Perfect for mathematics, education, and programming.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "156"
+        }
+    }
+    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- 3D Background Animation Container -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20 bg-animation-container"></div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-primary">Essential<span class="text-secondary">Tools</span></span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors">Privacy</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-white shadow-sm hidden">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+                <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors py-2">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors py-2">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors py-2">Contact</a>
+                <a href="../pages/privacy.html" class="text-gray-600 hover:text-primary transition-colors py-2">Privacy</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <!-- Tool Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Prime Number Checker</h1>
+                <p class="text-lg text-gray-600">Check if a number is prime or generate a list of prime numbers</p>
+            </div>
+            
+            <!-- 3D Tool Icon -->
+            <div class="tool-3d-container w-32 h-32 mx-auto mb-8"></div>
+            
+            <!-- Tool Container -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-gray-800">
+                <!-- Tool Mode -->
+                <div class="mb-6">
+                    <label for="tool-mode" class="block text-sm font-medium text-gray-700 mb-1">Tool Mode:</label>
+                    <select id="tool-mode" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="check-prime">Check if a Number is Prime</option>
+                        <option value="generate-primes">Generate Prime Numbers</option>
+                    </select>
+                </div>
+                
+                <!-- Input for Check Prime Mode -->
+                <div id="check-prime-input" class="mb-6">
+                    <label for="number-input" class="block text-sm font-medium text-gray-700 mb-1">Enter a Number:</label>
+                    <input type="number" id="number-input" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter a positive integer (e.g., 17)">
+                </div>
+                
+                <!-- Input for Generate Primes Mode -->
+                <div id="generate-primes-input" class="mb-6 hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="start-number" class="block text-sm font-medium text-gray-700 mb-1">Start Number:</label>
+                            <input type="number" id="start-number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Start (e.g., 1)" value="1">
+                        </div>
+                        <div>
+                            <label for="end-number" class="block text-sm font-medium text-gray-700 mb-1">End Number:</label>
+                            <input type="number" id="end-number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="End (e.g., 100)" value="100">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Options -->
+                <div class="mb-6">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="auto-check" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" checked>
+                        <label for="auto-check" class="ml-2 block text-sm text-gray-700">Auto-check as I type</label>
+                    </div>
+                </div>
+                
+                <!-- Action Button -->
+                <button id="action-btn" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mb-6">
+                    Check Prime
+                </button>
+                
+                <!-- Result Display -->
+                <div id="result-display" class="bg-gray-50 border border-gray-200 rounded-md p-4 mb-4 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Result:</h3>
+                    <div id="result-text" class="text-gray-900 font-medium break-words"></div>
+                </div>
+                
+                <!-- Copy Button -->
+                <button id="copy-btn" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 hidden">
+                    Copy to Clipboard
+                </button>
+            </div>
+            
+            <!-- Tool Information -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">About Prime Number Checker</h2>
+                <p class="text-gray-700 mb-4">
+                    The Prime Number Checker is a versatile tool that helps you work with prime numbers. This tool is particularly useful for:
+                </p>
+                <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                    <li>Mathematics students learning about prime numbers</li>
+                    <li>Teachers creating educational materials</li>
+                    <li>Programmers working with algorithms that involve prime numbers</li>
+                    <li>Cryptography enthusiasts exploring prime-based encryption</li>
+                    <li>Anyone curious about the fascinating world of prime numbers</li>
+                </ul>
+                <p class="text-gray-700">
+                    Our tool offers two main functions: checking if a specific number is prime, and generating a list of prime numbers within a specified range. Simply select your desired mode, enter the required values, and get instant results.
+                </p>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">What is a prime number?</h3>
+                        <p class="text-gray-700">A prime number is a natural number greater than 1 that cannot be formed by multiplying two smaller natural numbers. In other words, a prime number has exactly two factors: 1 and itself.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Is 1 a prime number?</h3>
+                        <p class="text-gray-700">No, 1 is not considered a prime number. By definition, a prime number must have exactly two distinct factors, but 1 only has one factor (itself).</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">What are some examples of prime numbers?</h3>
+                        <p class="text-gray-700">The first few prime numbers are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. Note that 2 is the only even prime number; all other even numbers are divisible by 2.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 mb-2">Why are prime numbers important?</h3>
+                        <p class="text-gray-700">Prime numbers are fundamental to number theory and have practical applications in cryptography, computer science, and various mathematical algorithms. They're also used in hash tables, pseudorandom number generators, and public-key encryption.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AdSense Ad -->
+            <div class="mb-8 text-center">
+                <!-- AdSense Ad Code -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1234567890123456"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <span class="text-xl font-bold">Essential<span class="text-secondary">Tools</span></span>
+                    <p class="text-gray-400 mt-1">Free online tools for everyday use</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end gap-4">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../js/3d-animation.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/prime-number.js"></script>
+</body>
+</html>

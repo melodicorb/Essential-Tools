@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online QR Code Generator - Create QR codes for URLs, text, contact information, and more. Easy to use and customize for personal and business use.">
+    <meta name="keywords" content="qr code generator, qr code maker, create qr code, custom qr code, free qr code, url to qr code, text to qr code, contact qr code">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="QR Code Generator - Essential Tools">
+    <meta property="og:description" content="Generate customizable QR codes for URLs, text, contact information, and more with our easy-to-use QR code generator tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/qr-generator.html">
+    <meta property="og:image" content="../images/qr-generator-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="QR Code Generator - Essential Tools">
+    <meta name="twitter:description" content="Generate customizable QR codes for URLs, text, contact information, and more with our easy-to-use QR code generator tool.">
+    <title>QR Code Generator - Essential Tools | Free Online QR Code Maker</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/qr-generator.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "QR Code Generator",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online QR Code Generator - Create QR codes for URLs, text, contact information, and more. Easy to use and customize for personal and business use."
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- 3D Background Animation -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10">
+        <canvas id="background-canvas"></canvas>
+    </div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="../index.html" class="flex items-center">
+                    <span class="text-xl font-bold text-primary">Essential<span class="text-secondary">Tools</span></span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="md:hidden mt-4 hidden">
+                <nav class="flex flex-col space-y-3">
+                    <a href="../index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-600 hover:text-primary transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Tool Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">QR Code Generator</h1>
+                <p class="text-lg text-gray-600">Create custom QR codes for URLs, text, contact info, and more</p>
+            </div>
+            
+            <!-- 3D Tool Icon -->
+            <div class="tool-3d-container w-32 h-32 mx-auto mb-8"></div>
+            
+            <!-- Tool Container -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-gray-800">
+                <!-- QR Generator Form -->
+                <div class="mb-6">
+                    <label for="qr-content" class="block text-sm font-medium text-gray-700 mb-1">QR Code Content:</label>
+                    <textarea id="qr-content" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter URL, text, or contact information..." rows="3"></textarea>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label for="qr-type" class="block text-sm font-medium text-gray-700 mb-1">Content Type:</label>
+                        <select id="qr-type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="url" selected>URL</option>
+                            <option value="text">Plain Text</option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone Number</option>
+                            <option value="sms">SMS</option>
+                            <option value="vcard">Contact (vCard)</option>
+                            <option value="wifi">WiFi Network</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="qr-size" class="block text-sm font-medium text-gray-700 mb-1">QR Code Size:</label>
+                        <select id="qr-size" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="128">Small (128x128)</option>
+                            <option value="256" selected>Medium (256x256)</option>
+                            <option value="512">Large (512x512)</option>
+                            <option value="1024">Extra Large (1024x1024)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label for="qr-foreground" class="block text-sm font-medium text-gray-700 mb-1">Foreground Color:</label>
+                        <input type="color" id="qr-foreground" value="#000000" class="w-full h-10 px-1 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="qr-background" class="block text-sm font-medium text-gray-700 mb-1">Background Color:</label>
+                        <input type="color" id="qr-background" value="#FFFFFF" class="w-full h-10 px-1 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="qr-error-correction" class="block text-sm font-medium text-gray-700 mb-1">Error Correction Level:</label>
+                    <select id="qr-error-correction" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="L">Low (7%)</option>
+                        <option value="M" selected>Medium (15%)</option>
+                        <option value="Q">Quartile (25%)</option>
+                        <option value="H">High (30%)</option>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">Higher error correction allows QR code to remain scannable even if partially damaged or obscured.</p>
+                </div>
+                
+                <button id="generate-btn" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mb-6">
+                    Generate QR Code
+                </button>
+                
+                <div class="mb-6 flex flex-col items-center">
+                    <label class="block text-sm font-medium text-gray-700 mb-3 self-start">Your QR Code:</label>
+                    <div id="qr-result" class="flex justify-center items-center bg-gray-100 border border-gray-300 rounded-md w-full min-h-[256px] p-4">
+                        <p class="text-gray-500 text-center">Your QR code will appear here</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button id="download-png-btn" class="flex-1 bg-secondary hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Download PNG
+                    </button>
+                    <button id="download-svg-btn" class="flex-1 bg-accent hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Download SVG
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Tool Information -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">About QR Code Generator</h2>
+                <p class="text-gray-700 mb-4">
+                    Our QR Code Generator tool allows you to create customized QR codes for various purposes. QR codes (Quick Response codes) are two-dimensional barcodes that can be scanned by smartphones and other devices to quickly access information.
+                </p>
+                <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                    <li>Generate QR codes for websites, plain text, contact information, and more</li>
+                    <li>Customize colors to match your brand or design</li>
+                    <li>Choose different sizes and error correction levels</li>
+                    <li>Download your QR codes in PNG or SVG format</li>
+                </ul>
+                
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">How to Use:</h3>
+                <ol class="list-decimal list-inside text-gray-700 mb-4 space-y-2">
+                    <li>Enter the content you want to encode in the QR code</li>
+                    <li>Select the content type (URL, text, email, etc.)</li>
+                    <li>Customize the appearance with size, colors, and error correction options</li>
+                    <li>Click "Generate QR Code" to create your QR code</li>
+                    <li>Download your QR code in your preferred format (PNG or SVG)</li>
+                </ol>
+                
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">QR Code Types Explained:</h3>
+                <ul class="text-gray-700 mb-4 space-y-3">
+                    <li><strong>URL:</strong> Create a QR code that opens a website when scanned</li>
+                    <li><strong>Plain Text:</strong> Encode any text message in a QR code</li>
+                    <li><strong>Email:</strong> Generate a QR code that opens an email composition with pre-filled address</li>
+                    <li><strong>Phone Number:</strong> Create a QR code that initiates a call when scanned</li>
+                    <li><strong>SMS:</strong> Generate a QR code that opens a text message composition</li>
+                    <li><strong>Contact (vCard):</strong> Share contact information through a QR code</li>
+                    <li><strong>WiFi Network:</strong> Create a QR code that connects to a WiFi network when scanned</li>
+                </ul>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                    <p class="text-blue-700"><strong>Tip:</strong> For best results, keep your QR code content concise. Shorter URLs and text result in less complex QR codes that are easier to scan.</p>
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">FAQ:</h3>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-medium text-gray-800">What is error correction in QR codes?</h4>
+                        <p class="text-gray-700">Error correction allows a QR code to be readable even if it's partially damaged or obscured. Higher levels of error correction make the QR code more robust but also more complex.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-800">Which format should I download my QR code in?</h4>
+                        <p class="text-gray-700">PNG is best for digital use and printing at the size generated. SVG is a vector format that can be scaled to any size without losing quality, making it ideal for printing at various sizes.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-800">Can I add a logo to my QR code?</h4>
+                        <p class="text-gray-700">This basic generator doesn't support adding logos. For QR codes with logos, use a higher error correction level (H) and add your logo using image editing software after downloading.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Tools -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Related Tools</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <a href="binary-converter.html" class="block p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <h3 class="font-medium text-primary">Binary Converter</h3>
+                        <p class="text-sm text-gray-600">Convert between binary, decimal, hexadecimal, and octal</p>
+                    </a>
+                    <a href="password-generator.html" class="block p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <h3 class="font-medium text-primary">Password Generator</h3>
+                        <p class="text-sm text-gray-600">Create strong, secure passwords</p>
+                    </a>
+                    <a href="unit-converter.html" class="block p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <h3 class="font-medium text-primary">Unit Converter</h3>
+                        <p class="text-sm text-gray-600">Convert between different units of measurement</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold">Essential<span class="text-secondary">Tools</span></span>
+                    <p class="text-gray-400 mt-2">Free online utilities for everyday use</p>
+                </div>
+                <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; <span id="current-year"></span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../js/3d-animation.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/enhanced-effects.js"></script>
+    <script src="../js/qr-generator.js"></script>
+</body>
+</html>

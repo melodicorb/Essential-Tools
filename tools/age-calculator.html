@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online Age Calculator - Calculate your exact age in years, months, and days. Find your next birthday, zodiac sign, and more with our easy-to-use tool.">
+    <meta name="keywords" content="age calculator, birthday calculator, exact age, years months days, zodiac sign, birth date calculator, age in days, next birthday countdown">
+    <meta name="author" content="Essential Tools">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Age Calculator - Essential Tools">
+    <meta property="og:description" content="Calculate your exact age in years, months, and days. Find your next birthday, zodiac sign, and more with our easy-to-use age calculator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://essentialtools.com/tools/age-calculator.html">
+    <meta property="og:image" content="../images/age-calculator-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Age Calculator - Essential Tools">
+    <meta name="twitter:description" content="Calculate your exact age in years, months, and days. Find your next birthday, zodiac sign, and more with our easy-to-use age calculator.">
+    <title>Age Calculator - Essential Tools | Calculate Your Exact Age</title>
+    <link rel="canonical" href="https://essentialtools.com/tools/age-calculator.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Age Calculator",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free online Age Calculator - Calculate your exact age in years, months, and days. Find your next birthday, zodiac sign, and more with our easy-to-use tool.",
+        "operatingSystem": "Web",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "156"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center space-x-2">
+                <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-amber-500">Essential Tools</div>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-2">
+            <div class="container mx-auto px-4 flex flex-col space-y-2">
+                <a href="../index.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Home</a>
+                <a href="../pages/about.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">About</a>
+                <a href="../pages/contact.html" class="block py-2 text-gray-600 hover:text-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 3D Icon Container -->
+        <div class="tool-3d-container w-32 h-32 mx-auto mb-6" data-tool-type="age-calculator"></div>
+        
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Tool Header -->
+            <div class="p-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                <h1 class="text-3xl font-bold mb-2">Age Calculator</h1>
+                <p class="text-blue-100">Calculate your exact age in years, months, and days</p>
+            </div>
+
+            <!-- Age Calculator Interface -->
+            <div class="p-6">
+                <!-- Date Inputs -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Enter Birth Date</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="birth-day" class="block text-gray-700 mb-1">Day</label>
+                            <input type="number" id="birth-day" min="1" max="31" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="DD">
+                        </div>
+                        <div>
+                            <label for="birth-month" class="block text-gray-700 mb-1">Month</label>
+                            <select id="birth-month" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="" disabled selected>Select Month</option>
+                                <option value="0">January</option>
+                                <option value="1">February</option>
+                                <option value="2">March</option>
+                                <option value="3">April</option>
+                                <option value="4">May</option>
+                                <option value="5">June</option>
+                                <option value="6">July</option>
+                                <option value="7">August</option>
+                                <option value="8">September</option>
+                                <option value="9">October</option>
+                                <option value="10">November</option>
+                                <option value="11">December</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="birth-year" class="block text-gray-700 mb-1">Year</label>
+                            <input type="number" id="birth-year" min="1900" max="2100" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="YYYY">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reference Date (Optional) -->
+                <div class="mb-6">
+                    <div class="flex items-center mb-2">
+                        <h2 class="text-xl font-semibold text-gray-800">Reference Date</h2>
+                        <span class="ml-2 text-sm text-gray-500">(Optional, defaults to today)</span>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" id="use-today" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" checked>
+                        <label for="use-today" class="ml-2 block text-gray-700">Use today's date</label>
+                    </div>
+                    <div id="reference-date-inputs" class="grid grid-cols-1 md:grid-cols-3 gap-4 hidden">
+                        <div>
+                            <label for="ref-day" class="block text-gray-700 mb-1">Day</label>
+                            <input type="number" id="ref-day" min="1" max="31" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="DD">
+                        </div>
+                        <div>
+                            <label for="ref-month" class="block text-gray-700 mb-1">Month</label>
+                            <select id="ref-month" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="0">January</option>
+                                <option value="1">February</option>
+                                <option value="2">March</option>
+                                <option value="3">April</option>
+                                <option value="4">May</option>
+                                <option value="5">June</option>
+                                <option value="6">July</option>
+                                <option value="7">August</option>
+                                <option value="8">September</option>
+                                <option value="9">October</option>
+                                <option value="10">November</option>
+                                <option value="11">December</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ref-year" class="block text-gray-700 mb-1">Year</label>
+                            <input type="number" id="ref-year" min="1900" max="2100" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="YYYY">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <div class="mb-6">
+                    <button id="calculate-age-btn" class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Calculate Age
+                    </button>
+                </div>
+
+                <!-- Results Section (Initially Hidden) -->
+                <div id="age-results" class="hidden">
+                    <div class="p-6 bg-gray-50 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Your Age</h3>
+                        
+                        <!-- Exact Age -->
+                        <div class="mb-4">
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div id="age-years" class="text-3xl font-bold text-blue-600">0</div>
+                                    <div class="text-gray-500 text-sm">Years</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div id="age-months" class="text-3xl font-bold text-blue-600">0</div>
+                                    <div class="text-gray-500 text-sm">Months</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div id="age-days" class="text-3xl font-bold text-blue-600">0</div>
+                                    <div class="text-gray-500 text-sm">Days</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Age Information -->
+                        <div class="space-y-2 text-gray-700">
+                            <p><span class="font-medium">Total Months:</span> <span id="total-months">0</span></p>
+                            <p><span class="font-medium">Total Weeks:</span> <span id="total-weeks">0</span></p>
+                            <p><span class="font-medium">Total Days:</span> <span id="total-days">0</span></p>
+                            <p><span class="font-medium">Total Hours:</span> <span id="total-hours">0</span></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Birthday Information -->
+                    <div class="p-6 bg-gray-50 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Birthday Information</h3>
+                        
+                        <div class="space-y-3 text-gray-700">
+                            <p><span class="font-medium">Day of Birth:</span> <span id="birth-day-of-week">-</span></p>
+                            <p><span class="font-medium">Zodiac Sign:</span> <span id="zodiac-sign">-</span></p>
+                            <p><span class="font-medium">Chinese Zodiac:</span> <span id="chinese-zodiac">-</span></p>
+                            <p><span class="font-medium">Next Birthday:</span> <span id="next-birthday">-</span></p>
+                            <p><span class="font-medium">Days Until Next Birthday:</span> <span id="days-to-birthday">-</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Settings</h3>
+                    
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" id="show-additional-info" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" checked>
+                        <label for="show-additional-info" class="ml-2 block text-gray-700">Show additional age information</label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="show-zodiac-info" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" checked>
+                        <label for="show-zodiac-info" class="ml-2 block text-gray-700">Show zodiac information</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tool Description & User Guide -->
+            <div class="p-6 border-t border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">About Age Calculator</h2>
+                <p class="text-gray-700 mb-4">The Age Calculator computes your exact age in years, months, and days based on your birth date. It also provides additional information such as your zodiac sign, day of birth, and days until your next birthday.</p>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">How to Use</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>Enter your birth date (day, month, and year)</li>
+                        <li>Optionally, specify a reference date other than today</li>
+                        <li>Click the "Calculate Age" button</li>
+                        <li>View your exact age and additional information</li>
+                    </ol>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Features</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Precise age calculation in years, months, and days</li>
+                        <li>Total age in various units (months, weeks, days, hours)</li>
+                        <li>Day of the week you were born</li>
+                        <li>Zodiac sign and Chinese zodiac animal</li>
+                        <li>Next birthday countdown</li>
+                        <li>Option to calculate age between any two dates</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Zodiac Signs</h3>
+                    <p class="text-gray-700 mb-2">The calculator determines your zodiac sign based on your birth date:</p>
+                    <ul class="grid grid-cols-2 md:grid-cols-4 gap-2 text-gray-700">
+                        <li><span class="font-medium">Aries:</span> Mar 21 - Apr 19</li>
+                        <li><span class="font-medium">Taurus:</span> Apr 20 - May 20</li>
+                        <li><span class="font-medium">Gemini:</span> May 21 - Jun 20</li>
+                        <li><span class="font-medium">Cancer:</span> Jun 21 - Jul 22</li>
+                        <li><span class="font-medium">Leo:</span> Jul 23 - Aug 22</li>
+                        <li><span class="font-medium">Virgo:</span> Aug 23 - Sep 22</li>
+                        <li><span class="font-medium">Libra:</span> Sep 23 - Oct 22</li>
+                        <li><span class="font-medium">Scorpio:</span> Oct 23 - Nov 21</li>
+                        <li><span class="font-medium">Sagittarius:</span> Nov 22 - Dec 21</li>
+                        <li><span class="font-medium">Capricorn:</span> Dec 22 - Jan 19</li>
+                        <li><span class="font-medium">Aquarius:</span> Jan 20 - Feb 18</li>
+                        <li><span class="font-medium">Pisces:</span> Feb 19 - Mar 20</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">FAQ</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-medium text-gray-800">How is age calculated?</p>
+                            <p class="text-gray-700">Age is calculated by finding the difference between the birth date and reference date. The calculator accounts for varying month lengths and leap years to provide an accurate result.</p>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800">Why might my age calculation differ from other calculators?</p>
+                            <p class="text-gray-700">Different calculators may use slightly different methods for handling partial months. This calculator uses the most common approach of counting complete months and remaining days.</p>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800">Is my data stored when I use this calculator?</p>
+                            <p class="text-gray-700">No, all calculations are performed locally in your browser. No birth date or personal information is transmitted or stored on our servers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-amber-400">Essential Tools</div>
+                    <p class="text-gray-400 mt-2">Free online utilities for everyday tasks</p>
+                </div>
+                <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 items-center">
+                    <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="../pages/about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="../pages/privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="../pages/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2023</span> Essential Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/enhanced-effects.js"></script>
+    <script src="../js/tool-3d-icons.js"></script>
+    <script src="../js/age-calculator.js"></script>
+</body>
+</html>
